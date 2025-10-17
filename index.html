@@ -78,7 +78,7 @@
             <p id="modal-message" class="text-xl text-light-text"></p>
             <button onclick="document.getElementById('custom-modal').classList.add('hidden')" 
                     class="block w-full px-6 py-3 text-2xl font-bold uppercase rounded-none tracking-wider transition-colors duration-200 
-                           bg-primary-accent text-dark-bg hover:bg-light-text">
+                            bg-primary-accent text-dark-bg hover:bg-light-text">
                 Close
             </button>
         </div>
@@ -278,7 +278,8 @@
                     SEND YOUR INQUIRY
                 </h2>
 
-                <form id="contact-form" action="https://formspree.io/f/xovkrwrq" method="POST" class="space-y-12">
+                <!-- FORM: Removed action and method for fetch submission -->
+                <form id="contact-form" class="space-y-6"> 
                     
                     <fieldset class="space-y-6 border-b border-divider pb-8">
                         <legend class="text-3xl font-bold mb-6">1. Your Contact Details</legend>
@@ -376,6 +377,11 @@
         const contactPage = document.getElementById('contact-page');
         const mainNav = document.getElementById('main-nav');
         const pageTitle = document.getElementById('page-title');
+        
+        // Form Elements
+        const form = document.getElementById('contact-form');
+        const submitButton = document.getElementById('submit-button');
+        const formspreeEndpoint = "https://formspree.io/f/xovkrwrq"; // The original Formspree endpoint
 
         // --- Utility: Show/Hide Modal ---
         const showModal = (title, message, isSuccess = false, callback = null) => {
@@ -456,27 +462,72 @@
         };
 
 
-        // --- Form Submission Handler (MOCK for Formspree success) ---
-        document.getElementById('contact-form').addEventListener('submit', (e) => {
-            // Note: The action attribute on the <form> handles the actual submission.
-            // We use preventDefault() here to show the mock success modal in the preview.
-            e.preventDefault(); 
+        // --- Form Submission Handler (FIXED to use Formspree via Fetch) ---
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault(); // Prevent default browser submission
             
-            const name = document.getElementById('full_name').value;
-            const email = document.getElementById('email').value;
-            const packageType = document.getElementById('package_type').value;
+            // Disable button and show loading state
+            submitButton.disabled = true;
+            submitButton.textContent = 'Sending...';
 
-            // Mock submission success message
-            const successMessage = `
-                Thank you, ${name}! Your inquiry for the ${packageType || 'Initial Session'} has been received.<br><br>
-                We will review your requested availability and send an email to ${email} within 24-48 hours to confirm the next steps and initial session time.
-            `;
+            // Get form data
+            const formData = new FormData(form);
 
-            showModal('Inquiry Sent', successMessage, true, () => {
-                // Reset form after mock submission and navigate back to the home page
-                document.getElementById('contact-form').reset();
-                navigateTo('home');
-            });
+            try {
+                const response = await fetch(formspreeEndpoint, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    const name = document.getElementById('full_name').value;
+                    const email = document.getElementById('email').value;
+                    // Provide a default package type if the selection is empty
+                    const packageType = document.getElementById('package_type').value || 'Initial Session'; 
+                    
+                    const successMessage = `
+                        Thank you, ${name}! Your inquiry for the <strong class="text-gold-accent">${packageType}</strong> has been received.<br><br>
+                        We will review your requested availability and send an email to <strong class="text-gold-accent">${email}</strong> within 24-48 hours to confirm the next steps and initial session time.
+                    `;
+
+                    showModal('Inquiry Sent', successMessage, true, () => {
+                        // Reset form after successful submission and navigate back to the home page
+                        form.reset();
+                        navigateTo('home');
+                    });
+                } else {
+                    // Handle Formspree or server errors
+                    let errorMessage = 'Form submission failed. Please check your required inputs and try again.';
+                    
+                    try {
+                        const errorData = await response.json();
+                        if (errorData && errorData.error) {
+                             // Use Formspree's generic error if available
+                             errorMessage = errorData.error;
+                        } else if (response.status === 422) {
+                            errorMessage = 'One or more required fields are missing or invalid.';
+                        }
+                        console.error('Formspree response error:', errorData);
+                    } catch (jsonError) {
+                        // If response is not JSON
+                        console.error('Server error with no JSON response. Status:', response.status);
+                    }
+                    
+                    showModal('Submission Failed', errorMessage, false);
+                }
+
+            } catch (error) {
+                // Handle network errors (e.g., user offline)
+                showModal('Connection Error', 'Could not connect to the server. Please check your internet connection and try again.', false);
+                console.error('Network Error:', error);
+            } finally {
+                // Re-enable button and reset text regardless of success or failure
+                submitButton.disabled = false;
+                submitButton.textContent = 'Send Inquiry';
+            }
         });
         
         // --- Initialization ---
