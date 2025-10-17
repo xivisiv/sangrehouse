@@ -1,541 +1,568 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title id="page-title">INNER MUSIC - Sangre House Consulting</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        // Standardize all font utilities to EB Garamond for the consistent look
-                        sans: ['EB Garamond', 'serif'],
-                        serif: ['EB Garamond', 'serif'], 
-                        mono: ['EB Garamond', 'serif'], 
-                    },
-                    colors: {
-                        // Deep Crimson Background (Slightly darker for the main body)
-                        'dark-bg': '#5C0000', 
-                        // Darker Card Color (Subtle contrast against the background)
-                        'dark-card': '#4A0000',
-                        // Accent Color (Silver/Light Gray for contrast)
-                        'primary-accent': '#C0C0C0', 
-                        // Text and Highlight Color
-                        'light-text': '#F0F0F0', 
-                        'muted-text': '#E0E0E0', 
-                        'divider': '#A00000', // Slightly lighter crimson for dividers
-                        'gold-accent': '#F0F0F0', // Gold for highlights (used in contact)
-                    },
-                }
-            }
-        }
-    </script>
-    <style>
-        body {
-            /* Apply EB Garamond globally */
-            font-family: 'EB Garamond', serif;
-            line-height: 1.8; /* Increased line height for better readability */
-        }
-        /* Style for form inputs */
-        input[type="text"], input[type="email"], input[type="date"], input[type="tel"], textarea, select {
-            background-color: #380000;
-            border: 1px solid #800000;
-            color: #F0F0F0;
-            padding: 1rem;
-            border-radius: 0;
-            transition: border-color 0.3s;
-        }
-        input[type="text"]:focus, input[type="email"]:focus, input[type="date"]:focus, input[type="tel"]:focus, textarea:focus, select:focus {
-            border-color: #C0C0C0;
-            outline: none;
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">INNER MUSIC - Sangre House Consulting</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        // Standardize all font utilities to EB Garamond for the consistent look
+                        sans: ['EB Garamond', 'serif'],
+                        serif: ['EB Garamond', 'serif'], 
+                        mono: ['EB Garamond', 'serif'], 
+                    },
+                    colors: {
+                        // Deep Crimson Background (Slightly darker for the main body)
+                        'dark-bg': '#5C0000', 
+                        // Darker Card Color (Subtle contrast against the background)
+                        'dark-card': '#4A0000',
+                        // Accent Color (Silver/Light Gray for contrast)
+                        'primary-accent': '#C0C0C0', 
+                        // Text and Highlight Color
+                        'light-text': '#F0F0F0', 
+                        'muted-text': '#E0E0E0', 
+                        'divider': '#A00000', // Slightly lighter crimson for dividers
+                        'gold-accent': '#F0F0F0', // Gold for highlights (used in contact)
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            /* Apply EB Garamond globally */
+            font-family: 'EB Garamond', serif;
+            line-height: 1.8; /* Increased line height for better readability */
+        }
+        /* Style for form inputs */
+        input[type="text"], input[type="email"], input[type="date"], input[type="tel"], textarea, select {
+            background-color: #380000;
+            border: 1px solid #800000;
+            color: #F0F0F0;
+            padding: 1rem;
+            border-radius: 0;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus, input[type="email"]:focus, input[type="date"]:focus, input[type="tel"]:focus, textarea:focus, select:focus {
+            border-color: #C0C0C0;
+            outline: none;
+        }
 
-        /* Custom scrollbar for a sharp look */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-thumb { background-color: #F0F0F0; border-radius: 0; }
-        ::-webkit-scrollbar-track { background-color: #5C0000; }
-        
-        /* Custom style to replicate the bracket/square marker without list-disc */
-        .::before {
-            content: '■ ';
-            color: var(--tw-colors-primary-accent);
-            font-weight: bold;
-            margin-right: 0.5rem; /* Space out the marker */
-        }
-    </style>
+        /* Custom scrollbar for a sharp look */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-thumb { background-color: #F0F0F0; border-radius: 0; }
+        ::-webkit-scrollbar-track { background-color: #5C0000; }
+        
+        /* Custom style to replicate the bracket/square marker without list-disc */
+        .::before {
+            content: '■ ';
+            color: var(--tw-colors-primary-accent);
+            font-weight: bold;
+            margin-right: 0.5rem; /* Space out the marker */
+        }
+    </style>
 </head>
 <body class="bg-dark-bg text-light-text selection:bg-light-text selection:text-dark-bg transition-colors duration-300">
 
-        <div id="custom-modal" class="fixed inset-0 bg-dark-bg/80 hidden items-center justify-center z-50">
-        <div class="bg-dark-card border-4 border-primary-accent p-8 md:p-12 w-full max-w-lg space-y-6">
-            <h3 id="modal-title" class="text-4xl font-bold text-gold-accent uppercase tracking-wider"></h3>
-            <p id="modal-message" class="text-xl text-light-text"></p>
-            <button onclick="document.getElementById('custom-modal').classList.add('hidden')" 
-                    class="block w-full px-6 py-3 text-2xl font-bold uppercase rounded-none tracking-wider transition-colors duration-200 
-                            bg-primary-accent text-dark-bg hover:bg-light-text">
-                Close
-            </button>
-        </div>
-    </div>
+    <div id="custom-modal" class="fixed inset-0 bg-dark-bg/80 hidden items-center justify-center z-50">
+        <div class="bg-dark-card border-4 border-primary-accent p-8 md:p-12 w-full max-w-lg space-y-6">
+            <h3 id="modal-title" class="text-4xl font-bold text-gold-accent uppercase tracking-wider"></h3>
+            <p id="modal-message" class="text-xl text-light-text"></p>
+            <button onclick="document.getElementById('custom-modal').classList.add('hidden')" 
+                    class="block w-full px-6 py-3 text-2xl font-bold uppercase rounded-none tracking-wider transition-colors duration-200 
+                            bg-primary-accent text-dark-bg hover:bg-light-text">
+                Close
+            </button>
+        </div>
+    </div>
 
-    <div class="max-w-6xl mx-auto px-8 lg:px-12 py-16">
+    <div class="max-w-6xl mx-auto px-8 lg:px-12 py-16">
 
-        <header class="flex justify-between items-start border-b border-divider pb-6 mb-16 content-block max-w-full">
-            <div class="space-y-1">
-                <h1 class="text-5xl sm:text-6xl font-bold tracking-tight text-light-text leading-none">
-                    INNER MUSIC
-                </h1>
-                <p class="text-xl font-light text-primary-accent uppercase tracking-widest">
-                    Sangre House Consulting
-                </p>
-            </div>
+        <header class="flex justify-between items-start border-b border-divider pb-6 mb-16 content-block max-w-full">
+            <div class="space-y-1">
+                <h1 class="text-5xl sm:text-6xl font-bold tracking-tight text-light-text leading-none">
+                    INNER MUSIC
+                </h1>
+                <p class="text-xl font-light text-primary-accent uppercase tracking-widest">
+                    Sangre House Consulting
+                </p>
+            </div>
 
-            <nav id="main-nav" class="text-right text-lg tracking-wider text-muted-text uppercase space-y-2 pt-1">
-                            </nav>
-        </header>
+            <nav id="main-nav" class="text-right text-lg tracking-wider text-muted-text uppercase space-y-2 pt-1">
+                </nav>
+        </header>
 
-        <div id="home-page" class="space-y-24">
-            
-                        <section id="method">
-                <div class="bg-dark-card p-8 md:p-12 border border-primary-accent">
-                    <h2 class="text-2xl uppercase tracking-widest text-primary-accent mb-6 font-bold">
-                        THE METHOD TO MADNESS
-                    </h2>
-                    <p class="text-4xl italic text-light-text border-l-4 border-primary-accent pl-6 py-2 leading-tight">
-                        “And those who were seen dancing were thought to be insane by those who could not hear the music.” — Nietzsche
-                    </p>
-                    
-                    <div class="mt-10 space-y-8 text-xl text-light-text">
-                        <p>
-                            The first musicians were individuals who built a relationship with a sound they heard in nature. Be it by hitting something by accident and hearing its resonance echo, or by hearing the rhythmic beating of a motion like walking or trying to start fires with firewood.
-                        </p>
-                        <p class="font-bold text-primary-accent text-2xl">
-                            Active listening as the first step.
-                        </p>
-                        <p>
-                            Then comes relationship — a response from the mind and body. The continuance of this cycle builds the instrument that creates the relationship between listener and object that we call music. This instrument is the creative principle of music which is inherent to all beings. 
-                        </p>
-                        <p>
-                            As the active listener becomes trained, the object can transform from a mere physical substance to something likeemotions, ideas, and states of experience. This ongoing relationship led to the discovery of things such as the major scale, rhythm, chanting, etc.
-                        </p>
-                    </div>
-                </div>
-            </section>
-            
-                        <section id="acts-method" class="border-y border-divider py-12">
-                <h3 class="text-3xl font-bold text-primary-accent uppercase tracking-wider text-center mb-12">
-                    The Three Acts of Inner Music
-                </h3>
-                <div class="grid md:grid-cols-3 gap-10 text-center text-xl">
-                    
-                    <div id="act-1" class="space-y-4 p-6 border border-divider hover:border-primary-accent transition duration-300 cursor-pointer" onclick="navigateTo('home', 'act-1')">
-                        <p class="text-5xl font-extrabold text-gold-accent tracking-tighter">I</p>
-                        <p class="text-2xl font-bold uppercase tracking-wider text-light-text">Act 1: The Active Listener</p>
-                        <p class="text-muted-text">
-                            Training the Active Listener to become an instrument. The difference between a trained and untrained ear is the ability to resonate like an instrument as you hear the sound.
-                        </p>
-                    </div>
+        <div id="home-page" class="space-y-24">
+            
+            <section id="method">
+                <div class="bg-dark-card p-8 md:p-12 border border-primary-accent">
+                    <h2 class="text-2xl uppercase tracking-widest text-primary-accent mb-6 font-bold">
+                        THE METHOD TO MADNESS
+                    </h2>
+                    <p class="text-4xl italic text-light-text border-l-4 border-primary-accent pl-6 py-2 leading-tight">
+                        “And those who were seen dancing were thought to be insane by those who could not hear the music.” — Nietzsche
+                    </p>
+                    
+                    <div class="mt-10 space-y-8 text-xl text-light-text">
+                        <p>
+                            The first musicians were individuals who built a relationship with a sound they heard in nature. Be it by hitting something by accident and hearing its resonance echo, or by hearing the rhythmic beating of a motion like walking or trying to start fires with firewood.
+                        </p>
+                        <p class="font-bold text-primary-accent text-2xl">
+                            Active listening as the first step.
+                        </p>
+                        <p>
+                            Then comes relationship — a response from the mind and body. The continuance of this cycle builds the instrument that creates the relationship between listener and object that we call music. This instrument is the creative principle of music which is inherent to all beings. 
+                        </p>
+                        <p>
+                            As the active listener becomes trained, the object can transform from a mere physical substance to something likeemotions, ideas, and states of experience. This ongoing relationship led to the discovery of things such as the major scale, rhythm, chanting, etc.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="acts-method" class="border-y border-divider py-12">
+                <h3 class="text-3xl font-bold text-primary-accent uppercase tracking-wider text-center mb-12">
+                    The Three Acts of Inner Music
+                </h3>
+                <div class="grid md:grid-cols-3 gap-10 text-center text-xl">
+                    
+                    <div id="act-1" class="space-y-4 p-6 border border-divider hover:border-primary-accent transition duration-300 cursor-pointer" onclick="navigateTo('home', 'act-1')">
+                        <p class="text-5xl font-extrabold text-gold-accent tracking-tighter">I</p>
+                        <p class="text-2xl font-bold uppercase tracking-wider text-light-text">Act 1: The Active Listener</p>
+                        <p class="text-muted-text">
+                            Training the Active Listener to become an instrument. The difference between a trained and untrained ear is the ability to resonate like an instrument as you hear the sound.
+                        </p>
+                    </div>
 
-                    <div id="act-2" class="space-y-4 p-6 border border-divider hover:border-primary-accent transition duration-300 cursor-pointer" onclick="navigateTo('home', 'act-2')">
-                        <p class="text-5xl font-extrabold text-gold-accent tracking-tighter">II</p>
-                        <p class="text-2xl font-bold uppercase tracking-wider text-light-text">Act 2: Body Responsiveness</p>
-                        <p class="text-muted-text">
-                            Developing the ability to respond, in the body, to the music outside and inside. This is done by training the body to follow the gravity of rhythm and sequential patterns (notes, scales, chords).
-                        </p>
-                    </div>
+                    <div id="act-2" class="space-y-4 p-6 border border-divider hover:border-primary-accent transition duration-300 cursor-pointer" onclick="navigateTo('home', 'act-2')">
+                        <p class="text-5xl font-extrabold text-gold-accent tracking-tighter">II</p>
+                        <p class="text-2xl font-bold uppercase tracking-wider text-light-text">Act 2: Body Responsiveness</p>
+                        <p class="text-muted-text">
+                            Developing the ability to respond, in the body, to the music outside and inside. This is done by training the body to follow the gravity of rhythm and sequential patterns (notes, scales, chords).
+                        </p>
+                    </div>
 
-                    <div id="act-3" class="space-y-4 p-6 border border-divider hover:border-primary-accent transition duration-300 cursor-pointer" onclick="navigateTo('home', 'act-3')">
-                        <p class="text-5xl font-extrabold text-gold-accent tracking-tighter">III</p>
-                        <p class="text-2xl font-bold uppercase tracking-wider text-light-text">Act 3: Intentionality</p>
-                        <p class="text-muted-text">
-                            The combination of listening and body response creates intentionality. We explore aesthetic choices and complex theoretical constructs to fine-tune the relationships we have with sound.
-                        </p>
-                    </div>
+                    <div id="act-3" class="space-y-4 p-6 border border-divider hover:border-primary-accent transition duration-300 cursor-pointer" onclick="navigateTo('home', 'act-3')">
+                        <p class="text-5xl font-extrabold text-gold-accent tracking-tighter">III</p>
+                        <p class="text-2xl font-bold uppercase tracking-wider text-light-text">Act 3: Intentionality</p>
+                        <p class="text-muted-text">
+                            The combination of listening and body response creates intentionality. We explore aesthetic choices and complex theoretical constructs to fine-tune the relationships we have with sound.
+                        </p>
+                    </div>
 
-                </div>
-            </section>
+                </div>
+            </section>
 
-                        <section class="grid md:grid-cols-2 gap-20 pt-16">
-                
-                <div id="philosophy-details" class="space-y-10">
-                    <h3 class="text-2xl uppercase tracking-widest text-primary-accent mb-8 border-b border-divider pb-3">
-                        II. Inner Music / V. The Aim
-                    </h3>
-                    <div class="space-y-6 text-xl text-light-text">
-                        <p>Inner Music trains this original connection.</p>
-                        <p>It teaches the body to hear and the ear to feel.</p>
-                        <p>Every exercise begins with presence and awareness, not technique. You learn to move as sound moves, to respond as nature responds — naturally, precisely, without hesitation.</p>
-                        <p>As your perception sharpens, the music starts to shape itself. Theory and structure emerge as reflections of what you already sense.</p>
-                    </div>
+            <section class="grid md:grid-cols-2 gap-20 pt-16">
+                
+                <div id="philosophy-details" class="space-y-10">
+                    <h3 class="text-2xl uppercase tracking-widest text-primary-accent mb-8 border-b border-divider pb-3">
+                        II. Inner Music / V. The Aim
+                    </h3>
+                    <div class="space-y-6 text-xl text-light-text">
+                        <p>Inner Music trains this original connection.</p>
+                        <p>It teaches the body to hear and the ear to feel.</p>
+                        <p>Every exercise begins with presence and awareness, not technique. You learn to move as sound moves, to respond as nature responds — naturally, precisely, without hesitation.</p>
+                        <p>As your perception sharpens, the music starts to shape itself. Theory and structure emerge as reflections of what you already sense.</p>
+                    </div>
 
-                    <div class="mt-10 p-8 border border-divider bg-dark-card/50">
-                        <h4 class="text-xl uppercase tracking-wider text-primary-accent mb-4">
-                            V. AIM: Tuning the Instrument
-                        </h4>
-                        <ul class="text-xl italic space-y-3 text-light-text">
-                            <li><span class=""></span>To tune the human instrument.</li>
-                            <li><span class=""></span>To restore the physical and emotional intelligence that gives rise to music.</li>
-                            <li><span class=""></span>To make creation an act of will.</li>
-                        </ul>
-                    </div>
-                </div>
+                    <div class="mt-10 p-8 border border-divider bg-dark-card/50">
+                        <h4 class="text-xl uppercase tracking-wider text-primary-accent mb-4">
+                            V. AIM: Tuning the Instrument
+                        </h4>
+                        <ul class="text-xl italic space-y-3 text-light-text">
+                            <li><span class=""></span>To tune the human instrument.</li>
+                            <li><span class=""></span>To restore the physical and emotional intelligence that gives rise to music.</li>
+                            <li><span class=""></span>To make creation an act of will.</li>
+                        </ul>
+                    </div>
+                </div>
 
-                <div id="practice-details" class="space-y-10">
-                    <h3 class="text-2xl uppercase tracking-widest text-primary-accent mb-8 border-b border-divider pb-3">
-                        III. Foundational Practice
-                    </h3>
-                    <ul class="space-y-5 text-xl text-light-text">
-                        <li class="pb-3 border-b border-divider">
-                            <strong class="text-primary-accent">Listening</strong> — Developing sensitivity to tone, space, rhythm, and silence.
-                        </li>
-                        <li class="pb-3 border-b border-divider">
-                            <strong class="text-primary-accent">Resonance</strong> — Feeling vibration in the body and learning to respond through movement.
-                        </li>
-                        <li class="pb-3 border-b border-divider">
-                            <strong class="text-primary-accent">Expression</strong> — Exploring how awareness becomes sound through your chosen instrument.
-                        </li>
-                        <li class="pb-3">
-                            <strong class="text-primary-accent">Reflection</strong> — Refining your aesthetic judgment by noticing what feels aligned, what feels false, what asks to return.
-                        </li>
-                    </ul>
-                    
-                    <h4 class="text-2xl uppercase tracking-wider text-primary-accent pt-8 border-t border-divider mb-4 font-bold">
-                        IV. What To Expect
-                    </h4>
-                    <ul class="space-y-3 text-xl text-light-text pl-5">
-                        <li><span class=""></span>Developed Ear and capacity for active listening.</li>
-                        <li><span class=""></span>Refined aesthetic taste (become aware of the choices you can make and how to achieve them).</li>
-                        <li><span class=""></span>Knowledge of music theory (as needed—assessed based on student’s needs).</li>
-                        <li><span class=""></span>Connection between creativity and intention so that each time you play music you can be inspired.</li>
-                        <li><span class=""></span>The ability to play songs of your liking.</li>
-                        <li><span class=""></span>Ongoing support with technical issues relevant to playing, singing, creating, and/or producing music.</li>
-                    </ul>
-                </div>
-            </section>
+                <div id="practice-details" class="space-y-10">
+                    <h3 class="text-2xl uppercase tracking-widest text-primary-accent mb-8 border-b border-divider pb-3">
+                        III. Foundational Practice
+                    </h3>
+                    <ul class="space-y-5 text-xl text-light-text">
+                        <li class="pb-3 border-b border-divider">
+                            <strong class="text-primary-accent">Listening</strong> — Developing sensitivity to tone, space, rhythm, and silence.
+                        </li>
+                        <li class="pb-3 border-b border-divider">
+                            <strong class="text-primary-accent">Resonance</strong> — Feeling vibration in the body and learning to respond through movement.
+                        </li>
+                        <li class="pb-3 border-b border-divider">
+                            <strong class="text-primary-accent">Expression</strong> — Exploring how awareness becomes sound through your chosen instrument.
+                        </li>
+                        <li class="pb-3">
+                            <strong class="text-primary-accent">Reflection</strong> — Refining your aesthetic judgment by noticing what feels aligned, what feels false, what asks to return.
+                        </li>
+                    </ul>
+                    
+                    <h4 class="text-2xl uppercase tracking-wider text-primary-accent pt-8 border-t border-divider mb-4 font-bold">
+                        IV. What To Expect
+                    </h4>
+                    <ul class="space-y-3 text-xl text-light-text pl-5">
+                        <li><span class=""></span>Developed Ear and capacity for active listening.</li>
+                        <li><span class=""></span>Refined aesthetic taste (become aware of the choices you can make and how to achieve them).</li>
+                        <li><span class=""></span>Knowledge of music theory (as needed—assessed based on student’s needs).</li>
+                        <li><span class=""></span>Connection between creativity and intention so that each time you play music you can be inspired.</li>
+                        <li><span class=""></span>The ability to play songs of your liking.</li>
+                        <li><span class=""></span>Ongoing support with technical issues relevant to playing, singing, creating, and/or producing music.</li>
+                    </ul>
+                </div>
+            </section>
 
-                        <section id="physics-friction" class="space-y-16 py-16 border-t-2 border-primary-accent/50 mt-16">
-                <h2 class="text-4xl font-bold text-primary-accent uppercase tracking-wider text-center">
-                    The Meeting Point: Physics & Psychology
-                </h2>
-                <div class="grid md:grid-cols-2 gap-12">
-                    
-                    <div class="space-y-6 text-2xl leading-relaxed text-light-text p-8 border border-divider">
-                        <h3 class="text-3xl font-bold text-gold-accent mb-4">Physics of Sound</h3>
-                        <p>
-                            The harmonic overtone series is the foundational meeting point between psychology and physics. Musical notes are tuned to the natural resonance frequency responses apparent all around in nature.
-                        </p>
-                        <p>
-                            The instrument is one piece of the puzzle. The way it’s played, the emotional state of the player, the room it resonates in, and how the musician is listening to the sound echoing back all create an intricate relationship that gives rise to the creative principle.
-                        </p>
-                        <p class="italic text-primary-accent mt-4 font-light text-xl">
-                            This won’t be a course on the math, but an overview of the fundamental principles that are relevant for a musician to know.
-                        </p>
-                    </div>
-                    
-                    <div id="friction-box" class="space-y-6 text-2xl leading-relaxed text-light-text p-8 border border-divider">
-                        <h3 class="text-3xl font-bold text-gold-accent mb-4">The Art of Friction</h3>
-                        <p>
-                            Every artist must become well-versed in the art of FRICTION.
-                        </p>
-                        <p>
-                            No authentic and self-expressive work of art was written without some sort of friction building the gravity for it.
-                        </p>
-                        <p>
-                            With Inner Music, we build sufficient understanding of how to direct the frustration of learning and creating toward the goal of <strong class="text-primary-accent">self-expression and artistry</strong>.
-                        </p>
-                    </div>
-                </div>
+            <section id="physics-friction" class="space-y-16 py-16 border-t-2 border-primary-accent/50 mt-16">
+                <h2 class="text-4xl font-bold text-primary-accent uppercase tracking-wider text-center">
+                    The Meeting Point: Physics & Psychology
+                </h2>
+                <div class="grid md:grid-cols-2 gap-12">
+                    
+                    <div class="space-y-6 text-2xl leading-relaxed text-light-text p-8 border border-divider">
+                        <h3 class="text-3xl font-bold text-gold-accent mb-4">Physics of Sound</h3>
+                        <p>
+                            The harmonic overtone series is the foundational meeting point between psychology and physics. Musical notes are tuned to the natural resonance frequency responses apparent all around in nature.
+                        </p>
+                        <p>
+                            The instrument is one piece of the puzzle. The way it’s played, the emotional state of the player, the room it resonates in, and how the musician is listening to the sound echoing back all create an intricate relationship that gives rise to the creative principle.
+                        </p>
+                        <p class="italic text-primary-accent mt-4 font-light text-xl">
+                            This won’t be a course on the math, but an overview of the fundamental principles that are relevant for a musician to know.
+                        </p>
+                    </div>
+                    
+                    <div id="friction-box" class="space-y-6 text-2xl leading-relaxed text-light-text p-8 border border-divider">
+                        <h3 class="text-3xl font-bold text-gold-accent mb-4">The Art of Friction</h3>
+                        <p>
+                            Every artist must become well-versed in the art of FRICTION.
+                        </p>
+                        <p>
+                            No authentic and self-expressive work of art was written without some sort of friction building the gravity for it.
+                        </p>
+                        <p>
+                            With Inner Music, we build sufficient understanding of how to direct the frustration of learning and creating toward the goal of <strong class="text-primary-accent">self-expression and artistry</strong>.
+                        </p>
+                    </div>
+                </div>
 
-                <div class="text-center">
-                    <button onclick="navigateTo('contact')" class="inline-block px-16 py-6 text-2xl font-bold uppercase rounded-none tracking-wider transition-all duration-300 
-                                     bg-light-text text-dark-bg border-2 border-light-text 
-                                     hover:bg-dark-bg hover:text-light-text hover:border-primary-accent
-                                     focus:outline-none focus:ring-4 focus:ring-primary-accent/50">
-                        Book a Consultation
-                    </button>
-                </div>
-            </section>
-        </div>
+                <div class="text-center">
+                    <button onclick="navigateTo('contact')" class="inline-block px-16 py-6 text-2xl font-bold uppercase rounded-none tracking-wider transition-all duration-300 
+                                            bg-light-text text-dark-bg border-2 border-light-text 
+                                            hover:bg-dark-bg hover:text-light-text hover:border-primary-accent
+                                            focus:outline-none focus:ring-4 focus:ring-primary-accent/50">
+                        Book a Consultation
+                    </button>
+                </div>
+            </section>
+        </div>
 
-        <div id="contact-page" class="space-y-12 hidden">
-            <div id="contact-form-container" class="content-block bg-dark-card p-8 md:p-12 border border-primary-accent mx-auto">
-                <h2 class="text-4xl font-bold text-primary-accent uppercase tracking-wider mb-12 text-center">
-                    SEND YOUR INQUIRY
-                </h2>
+        <div id="contact-page" class="space-y-12 hidden">
+            <div id="contact-form-container" class="content-block bg-dark-card p-8 md:p-12 border border-primary-accent mx-auto">
+                <h2 class="text-4xl font-bold text-primary-accent uppercase tracking-wider mb-12 text-center">
+                    SEND YOUR INQUIRY
+                </h2>
 
-                                <form id="contact-form" class="space-y-6"> 
-                    
-                    <fieldset class="space-y-6 border-b border-divider pb-8">
-                        <legend class="text-3xl font-bold mb-6">1. Your Contact Details</legend>
-                        
-                        <label for="full_name" class="block text-2xl">Full Name *</label>
-                        <input type="text" id="full_name" name="Full Name" required class="w-full text-xl">
+                <form id="contact-form" class="space-y-6"> 
+                    
+                    <fieldset class="space-y-6 border-b border-divider pb-8">
+                        <legend class="text-3xl font-bold mb-6">1. Your Contact Details</legend>
+                        
+                        <label for="full_name" class="block text-2xl">Full Name *</label>
+                        <input type="text" id="full_name" name="Full Name" required class="w-full text-xl">
 
-                        <label for="email" class="block text-2xl pt-2">Email *</label>
-                        <input type="email" id="email" name="Email" required class="w-full text-xl">
+                        <label for="email" class="block text-2xl pt-2">Email *</label>
+                        <input type="email" id="email" name="Email" required class="w-full text-xl">
 
-                        <label for="phone" class="block text-2xl pt-2">Phone Number *</label>
-                                                <input type="tel" id="phone" name="Phone Number" required class="w-full text-xl"> 
+                        <label for="phone" class="block text-2xl pt-2">Phone Number *</label>
+                        <input type="tel" id="phone" name="Phone Number" required placeholder="Required for contact" class="w-full text-xl">
 
-                        <label for="dob" class="block text-2xl pt-2">Date of Birth *</label>
-                                                <input type="date" id="dob" name="Date of Birth" required class="w-full text-xl"> 
+                        <label for="dob" class="block text-2xl pt-2">Date of Birth *</label>
+                        <input type="date" id="dob" name="Date of Birth" required class="w-full text-xl">
 
-                        <label for="address" class="block text-2xl pt-2">Address *</label>
-                                                <input type="text" id="address" name="Address" required placeholder="Street Address, City, State/Province, Zip/Postal Code" class="w-full text-xl">
-                    </fieldset>
+                        <label for="address" class="block text-2xl pt-2">Address *</label>
+                        <input type="text" id="address" name="Address" required placeholder="Street Address, City, State/Province, Zip/Postal Code" class="w-full text-xl">
+                    </fieldset>
 
-                    <fieldset class="space-y-6 border-b border-divider pb-8">
-                        <legend class="text-3xl font-bold mb-6">2. Session Preference</legend>
-                        
-                                                <div class="space-y-4">
-                            <p class="text-2xl font-bold text-primary-accent">Session Type *</p>
-                            <div class="flex flex-col sm:flex-row sm:space-x-8 space-y-3 sm:space-y-0 text-xl">
-                                <label class="flex items-center space-x-2 cursor-pointer">
-                                    <input type="radio" id="session_type_inperson" name="Session Type" value="In-Person" required class="h-5 w-5 accent-primary-accent">
-                                    <span>In Person</span>
-                                </label>
-                                <label class="flex items-center space-x-2 cursor-pointer">
-                                    <input type="radio" id="session_type_video" name="Session Type" value="Over Video Call" required class="h-5 w-5 accent-primary-accent">
-                                    <span>Over Video Call (Zoom)</span>
-                                </label>
-                            </div>
-                        </div>
-                                                <div class="space-y-4 pt-4">
-                            <p class="text-2xl font-bold text-primary-accent">Interested Package Type (Includes Price) *</p>
-                            <select id="package_type" name="Package Type" required class="w-full text-xl">
-                                                                <option value="">-- Select a package --</option>
-                                <option value="Initial Session - $150 (Video) / $175 (In-Person)">Initial Session (90 min) - $150 (Video) / $175 (In-Person)</option>
-                                <option value="4-Session Package - $560 (Video) / $640 (In-Person)">4-Session Package (Save $40/$60)</option>
-                                <option value="8-Session Package - $1080 (Video) / $1200 (In-Person)">8-Session Package (Save $120/$200)</option>
-                            </select>
-                        </div>
+                    <fieldset class="space-y-6 border-b border-divider pb-8">
+                        <legend class="text-3xl font-bold mb-6">2. Session Preference</legend>
+                        
+                        <div class="space-y-4">
+                            <p class="text-2xl text-primary-accent font-bold">Session Type *</p>
+                            <select id="session_type" name="Session Type" required class="w-full text-xl">
+                                <option value="">-- Select session type --</option>
+                                <option value="In Person">In Person ($185/hr)</option>
+                                <option value="Over Video Call">Over Video Call ($155/hr)</option>
+                            </select>
+                        </div>
+                        
+                        <div id="price-chart" class="bg-dark-bg p-6 border border-divider">
+                            <h4 class="text-2xl font-bold text-gold-accent mb-4 uppercase tracking-wider">Pricing (Per 1-Hour Session)</h4>
+                            <div class="grid grid-cols-2 gap-4 text-xl">
+                                <div>
+                                    <p class="font-bold text-primary-accent border-b border-divider pb-2 mb-2">In Person</p>
+                                    <ul class="space-y-2">
+                                        <li>Single Session: <strong class="text-light-text">$185</strong></li>
+                                        <li>4-Session Package: <strong class="text-light-text">$700</strong> ($175 ea)</li>
+                                        <li>8-Session Package: <strong class="text-light-text">$1320</strong> ($165 ea)</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <p class="font-bold text-primary-accent border-b border-divider pb-2 mb-2">Over Video Call</p>
+                                    <ul class="space-y-2">
+                                        <li>Single Session: <strong class="text-light-text">$155</strong></li>
+                                        <li>4-Session Package: <strong class="text-light-text">$580</strong> ($145 ea)</li>
+                                        <li>8-Session Package: <strong class="text-light-text">$1030</strong> ($135 ea)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
 
-                        <label for="instrument" class="block text-2xl pt-4">Instrument Focus *</label>
-                                                <input type="text" id="instrument" name="Instrument Focus" required placeholder="e.g., Guitar, Voice, Production, Composition..." class="w-full text-xl">
-                        
-                        <label for="availability" class="block text-2xl pt-4">Your General Availability *</label>
-                        <textarea id="availability" name="Availability" rows="3" placeholder="Please list your general availability (e.g., 'Tuesdays and Thursdays after 6pm EST', or 'Any time Saturday') so we can suggest an initial time." required class="w-full text-xl"></textarea>
-                        
-                        <label for="note" class="block text-2xl pt-4 border-t border-divider">Note / Session Goal Description *</label>
-                        <textarea id="note" name="Note/Goal Description" rows="4" placeholder="Describe the 'friction' or musical problem you are currently facing and any specific questions you have." required class="w-full text-xl"></textarea>
-                    </fieldset>
+                        <div class="space-y-4">
+                            <p class="text-2xl font-bold text-primary-accent pt-4">Interested Package Type *</p>
+                            <select id="package_type" name="Package Type" required class="w-full text-xl">
+                                <option value="">-- Select an option --</option>
+                                <option value="Initial Session">Initial Session</option>
+                                <option value="4-Session Package">4-Session Package</option>
+                                <option value="8-Session Package">8-Session Package</option>
+                            </select>
+                        </div>
 
-                    <fieldset class="space-y-6">
-                        <legend class="text-3xl font-bold mb-6">3. Preparation & Confirmation</legend>
-                        
-                        <div class="pt-2 text-xl space-y-4">
-                            <p class="text-2xl text-primary-accent font-bold">Preparation Checklist: *</p>
-                            
-                                                        <label class="flex items-start space-x-3 cursor-pointer">
-                                <input type="checkbox" name="Prep_Tech_Ready" required class="mt-2 h-5 w-5 accent-primary-accent">
-                                <span>If requesting a Zoom session, I confirm I have a working microphone and video setup.</span>
-                            </label>
-                            
-                            <label class="flex items-start space-x-3 cursor-pointer">
-                                <input type="checkbox" name="Prep_Instrument_Tuned" required class="mt-2 h-5 w-5 accent-primary-accent">
-                                <span>My instrument (if applicable) will be tuned and ready for the scheduled session.</span>
-                            </label>
-                            
-                            <label class="flex items-start space-x-3 cursor-pointer">
-                                <input type="checkbox" name="Prep_Quiet_Space" required class="mt-2 h-5 w-5 accent-primary-accent">
-                                <span>I plan to be in a quiet, focused space free from distractions during the session.</span>
-                            </label>
-                            
-                            <label class="flex items-start space-x-3 cursor-pointer">
-                                <input type="checkbox" name="Prep_Reviewed_Policies" required class="mt-2 h-5 w-5 accent-primary-accent">
-                                <span>I understand this is an inquiry, and the final time and payment will be arranged via email.</span>
-                            </label>
-                        </div>
-                    </fieldset>
+                        <label for="instrument" class="block text-2xl pt-4">Instrument Focus *</label>
+                        <input type="text" id="instrument" name="Instrument Focus" required placeholder="e.g., Guitar, Voice, Production..." class="w-full text-xl">
+                        
+                        <label for="availability" class="block text-2xl pt-4">Your General Availability *</label>
+                        <textarea id="availability" name="Availability" rows="3" placeholder="Please list your general availability (e.g., 'Tuesdays and Thursdays after 6pm EST', or 'Any time Saturday') so we can suggest an initial time." required class="w-full text-xl"></textarea>
+                        
+                        <label for="note" class="block text-2xl pt-4 border-t border-divider">Note / Session Goal Description *</label>
+                        <textarea id="note" name="Note/Goal Description" rows="4" placeholder="Describe the 'friction' or musical problem you are currently facing and any specific questions you have." required class="w-full text-xl"></textarea>
+                    </fieldset>
 
-                    <div class="pt-8 text-center">
-                        <button type="submit" id="submit-button" class="w-full md:w-auto inline-block px-16 py-6 text-2xl font-bold uppercase rounded-none tracking-wider transition-all duration-300 
-                                     bg-light-text text-dark-bg border-2 border-light-text 
-                                     hover:bg-dark-bg hover:text-light-text hover:border-primary-accent
-                                     focus:outline-none focus:ring-4 focus:ring-primary-accent/50">
-                            Send Inquiry
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
+                    <fieldset class="space-y-6">
+                        <legend class="text-3xl font-bold mb-6">3. Preparation & Confirmation</legend>
+                        
+                        <div class="pt-4 pb-4 border-y border-divider">
+                            <p class="text-lg italic text-muted-text">
+                                Each session is one hour.
+                                Packages are paid upfront and must be used within 8–10 weeks (4-pack) or 16–20 weeks (8-pack).
+                                Reschedules allowed with 24-hour notice.
+                                In-home lessons are available within the Los Angeles area. A travel fee applies depending on distance.
+                            </p>
+                        </div>
 
-        <footer class="bg-dark-card py-10 mt-24">
-            <div class="max-w-6xl mx-auto px-12 text-center text-xl tracking-wider text-muted-text">
-                &copy; 2025 Sangre House Consulting. All Rights Reserved.
-            </div>
-        </footer>
-    </div>
+                        <div class="pt-2 text-xl space-y-4">
+                            <p class="text-2xl text-primary-accent font-bold">Preparation Checklist *:</p>
+                            
+                            <label class="flex items-start space-x-3 cursor-pointer">
+                                <input type="checkbox" name="Prep_Tech_Ready" required class="mt-2 h-5 w-5 accent-primary-accent">
+                                <span>If requesting a Zoom session, I confirm I have a working microphone and video setup.</span>
+                            </label>
+                            
+                            <label class="flex items-start space-x-3 cursor-pointer">
+                                <input type="checkbox" name="Prep_Instrument_Tuned" required class="mt-2 h-5 w-5 accent-primary-accent">
+                                <span>My instrument (if applicable) will be tuned and ready for the scheduled session.</span>
+                            </label>
+                            
+                            <label class="flex items-start space-x-3 cursor-pointer">
+                                <input type="checkbox" name="Prep_Quiet_Space" required class="mt-2 h-5 w-5 accent-primary-accent">
+                                <span>I plan to be in a quiet, focused space free from distractions during the session.</span>
+                            </label>
+                            
+                            <label class="flex items-start space-x-3 cursor-pointer">
+                                <input type="checkbox" name="Prep_Reviewed_Policies" required class="mt-2 h-5 w-5 accent-primary-accent">
+                                <span>I understand this is an inquiry, and the final time and payment will be arranged via email.</span>
+                            </label>
+                        </div>
+                    </fieldset>
 
-    <script>
-        // --- Router State ---
-        let currentPage = 'home';
-        const homePage = document.getElementById('home-page');
-        const contactPage = document.getElementById('contact-page');
-        const mainNav = document.getElementById('main-nav');
-        const pageTitle = document.getElementById('page-title');
-        
-        // Form Elements
-        const form = document.getElementById('contact-form');
-        const submitButton = document.getElementById('submit-button');
-        const formspreeEndpoint = "https://formspree.io/f/movkpgbj"; // The original Formspree endpoint
+                    <div class="pt-8 text-center">
+                        <button type="submit" id="submit-button" class="w-full md:w-auto inline-block px-16 py-6 text-2xl font-bold uppercase rounded-none tracking-wider transition-all duration-300 
+                                            bg-light-text text-dark-bg border-2 border-light-text 
+                                            hover:bg-dark-bg hover:text-light-text hover:border-primary-accent
+                                            focus:outline-none focus:ring-4 focus:ring-primary-accent/50">
+                            Send Inquiry
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
-        // --- Utility: Show/Hide Modal ---
-        const showModal = (title, message, isSuccess = false, callback = null) => {
-            document.getElementById('modal-title').textContent = title;
-            document.getElementById('modal-message').innerHTML = message;
-            document.getElementById('custom-modal').classList.remove('hidden');
-            document.getElementById('custom-modal').classList.add('flex');
-            document.getElementById('modal-title').style.color = isSuccess ? 'var(--tw-colors-gold-accent)' : 'var(--tw-colors-primary-accent)';
-            
-            // Set up the close button action
-            const closeButton = document.getElementById('custom-modal').querySelector('button');
-            closeButton.onclick = () => {
-                document.getElementById('custom-modal').classList.add('hidden');
-                document.getElementById('custom-modal').classList.remove('flex');
-                if (callback) {
-                    callback();
-                }
-            };
-        };
+        <footer class="bg-dark-card py-10 mt-24">
+            <div class="max-w-6xl mx-auto px-12 text-center text-xl tracking-wider text-muted-text">
+                &copy; 2025 Sangre House Consulting. All Rights Reserved.
+            </div>
+        </footer>
+    </div>
 
-        // --- Core Router Function ---
-        const navigateTo = (page, sectionId = null) => {
-            currentPage = page;
-            window.scrollTo(0, 0); // Always scroll to top on page change
+    <script>
+        // --- Router State ---
+        let currentPage = 'home';
+        const homePage = document.getElementById('home-page');
+        const contactPage = document.getElementById('contact-page');
+        const mainNav = document.getElementById('main-nav');
+        const pageTitle = document.getElementById('page-title');
+        
+        // Form Elements
+        const form = document.getElementById('contact-form');
+        const submitButton = document.getElementById('submit-button');
+        const formspreeEndpoint = "https://formspree.io/f/movkpgbj"; // The original Formspree endpoint
 
-            // 1. Update Visibility
-            if (page === 'home') {
-                homePage.classList.remove('hidden');
-                contactPage.classList.add('hidden');
-                pageTitle.textContent = 'INNER MUSIC - Sangre House Consulting';
-                
-                // If a section is specified, scroll to it after a short delay
-                if (sectionId) {
-                    // Use requestAnimationFrame for smoother scrolling after DOM update
-                    requestAnimationFrame(() => {
-                        const targetElement = document.getElementById(sectionId);
-                        if (targetElement) {
-                            // Scroll with an offset for better viewing below the header
-                            const y = targetElement.getBoundingClientRect().top + window.scrollY - 100; 
-                            window.scrollTo({ top: y, behavior: 'smooth' });
-                        }
-                    });
-                }
+        // --- Utility: Show/Hide Modal ---
+        const showModal = (title, message, isSuccess = false, callback = null) => {
+            document.getElementById('modal-title').textContent = title;
+            document.getElementById('modal-message').innerHTML = message;
+            document.getElementById('custom-modal').classList.remove('hidden');
+            document.getElementById('custom-modal').classList.add('flex');
+            document.getElementById('modal-title').style.color = isSuccess ? 'var(--tw-colors-gold-accent)' : 'var(--tw-colors-primary-accent)';
+            
+            // Set up the close button action
+            const closeButton = document.getElementById('custom-modal').querySelector('button');
+            closeButton.onclick = () => {
+                document.getElementById('custom-modal').classList.add('hidden');
+                document.getElementById('custom-modal').classList.remove('flex');
+                if (callback) {
+                    callback();
+                }
+            };
+        };
 
-            } else if (page === 'contact') {
-                homePage.classList.add('hidden');
-                contactPage.classList.remove('hidden');
-                pageTitle.textContent = 'CONTACT - INNER MUSIC Inquiry';
-            }
+        // --- Core Router Function ---
+        const navigateTo = (page, sectionId = null) => {
+            currentPage = page;
+            window.scrollTo(0, 0); // Always scroll to top on page change
 
-            // 2. Update Navigation Links
-            renderNavigation();
-        };
+            // 1. Update Visibility
+            if (page === 'home') {
+                homePage.classList.remove('hidden');
+                contactPage.classList.add('hidden');
+                pageTitle.textContent = 'INNER MUSIC - Sangre House Consulting';
+                
+                // If a section is specified, scroll to it after a short delay
+                if (sectionId) {
+                    // Use requestAnimationFrame for smoother scrolling after DOM update
+                    requestAnimationFrame(() => {
+                        const targetElement = document.getElementById(sectionId);
+                        if (targetElement) {
+                            // Scroll with an offset for better viewing below the header
+                            const y = targetElement.getBoundingClientRect().top + window.scrollY - 100; 
+                            window.scrollTo({ top: y, behavior: 'smooth' });
+                        }
+                    });
+                }
 
-        // --- Renders navigation links based on current page ---
-        const renderNavigation = () => {
-            mainNav.innerHTML = ''; // Clear existing nav
-            
-            let linksHTML = '';
+            } else if (page === 'contact') {
+                homePage.classList.add('hidden');
+                contactPage.classList.remove('hidden');
+                pageTitle.textContent = 'CONTACT - INNER MUSIC Inquiry';
+            }
 
-            if (currentPage === 'home') {
-                // On the Home page, show the Contact link
-                linksHTML = `
-                    <a href="#" onclick="navigateTo('contact')" class="block hover:text-primary-accent transition duration-150">
-                        Book Consultation
-                    </a>
-                `;
-            } else if (currentPage === 'contact') {
-                // On the Contact page, show the Home link
-                linksHTML = `
-                    <a href="#" onclick="navigateTo('home')" class="block hover:text-primary-accent transition duration-150">
-                        Home / Philosophy
-                    </a>
-                `;
-            }
-            
-            mainNav.innerHTML = linksHTML;
-        };
+            // 2. Update Navigation Links
+            renderNavigation();
+        };
+
+        // --- Renders navigation links based on current page ---
+        const renderNavigation = () => {
+            mainNav.innerHTML = ''; // Clear existing nav
+            
+            let linksHTML = '';
+
+            if (currentPage === 'home') {
+                // On the Home page, show the Contact link
+                linksHTML = `
+                    <a href="#" onclick="navigateTo('contact')" class="block hover:text-primary-accent transition duration-150">
+                        Book Consultation
+                    </a>
+                `;
+            } else if (currentPage === 'contact') {
+                // On the Contact page, show the Home link
+                linksHTML = `
+                    <a href="#" onclick="navigateTo('home')" class="block hover:text-primary-accent transition duration-150">
+                        Home / Philosophy
+                    </a>
+                `;
+            }
+            
+            mainNav.innerHTML = linksHTML;
+        };
 
 
-        // --- Form Submission Handler (FIXED to use Formspree via Fetch) ---
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault(); // Prevent default browser submission
-            
-            // Disable button and show loading state
-            submitButton.disabled = true;
-            submitButton.textContent = 'Sending...';
+        // --- Form Submission Handler (FIXED to use Formspree via Fetch) ---
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault(); // Prevent default browser submission
+            
+            // Disable button and show loading state
+            submitButton.disabled = true;
+            submitButton.textContent = 'Sending...';
 
-            // Get form data
-            const formData = new FormData(form);
+            // Get form data
+            const formData = new FormData(form);
 
-            try {
-                const response = await fetch(formspreeEndpoint, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
+            try {
+                const response = await fetch(formspreeEndpoint, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
 
-                if (response.ok) {
-                    const name = document.getElementById('full_name').value;
-                    const email = document.getElementById('email').value;
-                    // The package type is now guaranteed to have a value due to 'required'
-                    const packageType = document.getElementById('package_type').value; 
-                    
-                    const successMessage = `
-                        Thank you, ${name}! Your inquiry for the <strong class="text-gold-accent">${packageType}</strong> has been received.<br><br>
-                        We will review your requested availability and send an email to <strong class="text-gold-accent">${email}</strong> within 24-48 hours to confirm the next steps and initial session time.
-                    `;
+                if (response.ok) {
+                    const name = document.getElementById('full_name').value;
+                    const email = document.getElementById('email').value;
+                    // Provide a default package type if the selection is empty
+                    const packageType = document.getElementById('package_type').value || 'Initial Session'; 
+                    
+                    const successMessage = `
+                        Thank you, ${name}! Your inquiry for the <strong class="text-gold-accent">${packageType}</strong> has been received.<br><br>
+                        We will review your requested availability and send an email to <strong class="text-gold-accent">${email}</strong> within 24-48 hours to confirm the next steps and initial session time.
+                    `;
 
-                    showModal('Inquiry Sent', successMessage, true, () => {
-                        // Reset form after successful submission and navigate back to the home page
-                        form.reset();
-                        navigateTo('home');
-                    });
-                } else {
-                    // Handle Formspree or server errors
-                    let errorMessage = 'Form submission failed. Please check your required inputs and try again.';
-                    
-                    try {
-                        const errorData = await response.json();
-                        if (errorData && errorData.error) {
-                             // Use Formspree's generic error if available
-                             errorMessage = errorData.error;
-                        } else if (response.status === 422) {
-                            errorMessage = 'One or more required fields are missing or invalid.';
-                        }
-                        console.error('Formspree response error:', errorData);
-                    } catch (jsonError) {
-                        // If response is not JSON
-                        console.error('Server error with no JSON response. Status:', response.status);
-                    }
-                    
-                    showModal('Submission Failed', errorMessage, false);
-                }
+                    showModal('Inquiry Sent', successMessage, true, () => {
+                        // Reset form after successful submission and navigate back to the home page
+                        form.reset();
+                        navigateTo('home');
+                    });
+                } else {
+                    // Handle Formspree or server errors
+                    let errorMessage = 'Form submission failed. Please check your required inputs and try again.';
+                    
+                    try {
+                        const errorData = await response.json();
+                        if (errorData && errorData.error) {
+                             // Use Formspree's generic error if available
+                             errorMessage = errorData.error;
+                        } else if (response.status === 422) {
+                            errorMessage = 'One or more required fields are missing or invalid.';
+                        }
+                        console.error('Formspree response error:', errorData);
+                    } catch (jsonError) {
+                        // If response is not JSON
+                        console.error('Server error with no JSON response. Status:', response.status);
+                    }
+                    
+                    showModal('Submission Failed', errorMessage, false);
+                }
 
-            } catch (error) {
-                // Handle network errors (e.g., user offline)
-                showModal('Connection Error', 'Could not connect to the server. Please check your internet connection and try again.', false);
-                console.error('Network Error:', error);
-            } finally {
-                // Re-enable button and reset text regardless of success or failure
-                submitButton.disabled = false;
-                submitButton.textContent = 'Send Inquiry';
-            }
-        });
-        
-        // --- Initialization ---
-        window.onload = function() {
-            navigateTo('home');
-        };
-    </script>
+            } catch (error) {
+                // Handle network errors (e.g., user offline)
+                showModal('Connection Error', 'Could not connect to the server. Please check your internet connection and try again.', false);
+                console.error('Network Error:', error);
+            } finally {
+                // Re-enable button and reset text regardless of success or failure
+                submitButton.disabled = false;
+                submitButton.textContent = 'Send Inquiry';
+            }
+        });
+        
+        // Initial navigation setup
+        document.addEventListener('DOMContentLoaded', () => {
+            renderNavigation();
+        });
+    </script>
 </body>
 </html>
