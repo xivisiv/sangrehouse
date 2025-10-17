@@ -264,10 +264,10 @@
 
         <div id="contact-page" class="space-y-12 hidden">
             <div id="contact-form-container" class="content-block bg-dark-card p-8 md:p-12 border border-primary-accent mx-auto">
-                <h2 class="text-4xl font-bold text-primary-accent uppercase tracking-wider mb-12 text-center">
+                <h2 class="text-4xl font-bold text-primary-accent uppercase tracking-wider mb-8 text-center">
                     SEND YOUR INQUIRY
                 </h2>
-
+                
                 <form id="contact-form" class="space-y-10"> 
                     
                     <fieldset class="space-y-6 border-b border-divider pb-8">
@@ -398,11 +398,16 @@
                 </form>
             </div>
         </div>
+        
 
         <footer class="bg-dark-card py-10 mt-24">
             <div class="max-w-6xl mx-auto px-12 text-center text-xl tracking-wider text-muted-text">
+                Ario Lajmiri
+            </div>
+            <div class="max-w-6xl mx-auto px-12 text-center text-xl tracking-wider text-muted-text">
                 &copy; 2025 Sangre House Consulting. All Rights Reserved.
             </div>
+
         </footer>
     </div>
 
@@ -418,6 +423,8 @@
         const form = document.getElementById('contact-form');
         const submitButton = document.getElementById('submit-button');
         const formspreeEndpoint = "https://formspree.io/f/movkpgbj"; // The original Formspree endpoint
+        const formspreeCustomKey = 'REPLACE_WITH_YOUR_FORMSPREE_CUSTOM_KEY'; 
+
 
         // --- Utility: Show/Hide Modal ---
         const showModal = (title, message, isSuccess = false, callback = null) => {
@@ -498,13 +505,23 @@
         };
 
 
-        // --- Form Submission Handler (FIXED to use Formspree via Fetch) ---
+        // --- Form Submission Handler (Including Custom Key logic for Formspree) ---
         form.addEventListener('submit', async (e) => {
             e.preventDefault(); // Prevent default browser submission
             
             // Disable button and show loading state
             submitButton.disabled = true;
             submitButton.textContent = 'Sending...';
+
+            // Prepare headers object
+            const headers = {
+                'Accept': 'application/json'
+            };
+            
+            // Add the custom key header if one is provided
+            if (formspreeCustomKey && formspreeCustomKey !== 'REPLACE_WITH_YOUR_FORMSPREE_CUSTOM_KEY') {
+                headers['X-Formspree-Token'] = formspreeCustomKey;
+            }
 
             // Get form data
             const formData = new FormData(form);
@@ -513,9 +530,7 @@
                 const response = await fetch(formspreeEndpoint, {
                     method: 'POST',
                     body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
+                    headers: headers // Use the dynamic headers object
                 });
 
                 if (response.ok) {
@@ -550,6 +565,11 @@
                     } catch (jsonError) {
                         // If response is not JSON
                         console.error('Server error with no JSON response. Status:', response.status);
+                    }
+                    
+                    // Show specific error message related to AJAX requirement if detected
+                    if (response.status === 400 && response.url.includes('formspree.io')) {
+                        errorMessage = `Submission Failed: Formspree requires reCAPTCHA to be disabled or a Custom Key to be set for AJAX submissions. Please check your form's settings on the Formspree website.`;
                     }
                     
                     showModal('Submission Failed', errorMessage, false);
