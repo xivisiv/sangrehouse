@@ -4,13 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="page-title">INNER MUSIC - Sangre House Consulting</title>
-    <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Import EB Garamond font -->
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
     
-    <!-- Configure Tailwind for a consistent EB Garamond font and the deep crimson palette -->
     <script>
         tailwind.config = {
             theme: {
@@ -74,25 +71,22 @@
 </head>
 <body class="bg-dark-bg text-light-text selection:bg-light-text selection:text-dark-bg transition-colors duration-300">
 
-    <!-- Custom Modal for Alerts/Success Messages (Hidden by default) -->
+    <!-- Custom Modal for Alerts/Confirmation -->
     <div id="custom-modal" class="fixed inset-0 bg-dark-bg/80 hidden items-center justify-center z-50">
         <div class="bg-dark-card border-4 border-primary-accent p-8 md:p-12 w-full max-w-lg space-y-6">
             <h3 id="modal-title" class="text-4xl font-bold text-gold-accent uppercase tracking-wider"></h3>
             <p id="modal-message" class="text-xl text-light-text"></p>
             <button onclick="document.getElementById('custom-modal').classList.add('hidden')" 
                     class="block w-full px-6 py-3 text-2xl font-bold uppercase rounded-none tracking-wider transition-colors duration-200 
-                                bg-primary-accent text-dark-bg hover:bg-light-text">
+                           bg-primary-accent text-dark-bg hover:bg-light-text">
                 Close
             </button>
         </div>
     </div>
 
-    <!-- MAIN APPLICATION CONTAINER -->
     <div class="max-w-6xl mx-auto px-8 lg:px-12 py-16">
 
-        <!-- SHARED HEADER (Dynamic Links Managed by JS) -->
         <header class="flex justify-between items-start border-b border-divider pb-6 mb-16 content-block max-w-full">
-            <!-- Title & Logo Area (Left) -->
             <div class="space-y-1">
                 <h1 class="text-5xl sm:text-6xl font-bold tracking-tight text-light-text leading-none">
                     INNER MUSIC
@@ -102,127 +96,161 @@
                 </p>
             </div>
 
-            <!-- Dynamic Navigation (Right) -->
             <nav id="main-nav" class="text-right text-lg tracking-wider text-muted-text uppercase space-y-2 pt-1">
-                <!-- Links will be injected by JavaScript based on current page -->
+                <!-- Navigation links are injected by JavaScript -->
             </nav>
         </header>
 
-        <!-- ========================================================== -->
-        <!-- HOME PAGE CONTENT (From original index.html) -->
-        <!-- ========================================================== -->
         <div id="home-page" class="space-y-24">
             
-            <!-- Main Focus Section: The Method to Madness -->
+            <!-- SECTION I: THE METHOD TO MADNESS -->
             <section id="method">
                 <div class="bg-dark-card p-8 md:p-12 border border-primary-accent">
-                    <p class="text-lg uppercase tracking-widest text-primary-accent mb-6">
-                        The Founding Principle
-                    </p>
-                    <!-- EB Garamond Quote -->
-                    <h2 class="text-4xl italic text-light-text border-l-4 border-primary-accent pl-6 py-2 leading-tight">
-                        “And those who were seen dancing were thought to be insane by those who could not hear the music.” — Nietzsche
+                    <h2 class="text-2xl uppercase tracking-widest text-primary-accent mb-6 font-bold">
+                        THE METHOD TO MADNESS
                     </h2>
+                    <p class="text-4xl italic text-light-text border-l-4 border-primary-accent pl-6 py-2 leading-tight">
+                        “And those who were seen dancing were thought to be insane by those who could not hear the music.” — Nietzsche
+                    </p>
                     
                     <div class="mt-10 space-y-8 text-xl text-light-text">
                         <p>
-                            The first musicians built a **relationship with a sound** they heard in nature. Be it by hitting something by accident and hearing its resonance echo, or by hearing the rhythmic beating of a motion like walking.
+                            The first musicians were individuals who built a relationship with a sound they heard in nature. Be it by hitting something by accident and hearing its resonance echo, or by hearing the rhythmic beating of a motion like walking or trying to start fires with firewood.
                         </p>
-                        <p class="font-bold text-primary-accent">
-                            Active listening is the first step.
+                        <p class="font-bold text-primary-accent text-2xl">
+                            Active listening as the first step.
                         </p>
                         <p>
-                            The continuance of this cycle builds the instrument that creates the relationship between listener and object that we call music. This instrument is the **creative principle** of music which is inherent to all beings.
+                            Then comes relationship — a response from the mind and body. The continuance of this cycle builds the instrument that creates the relationship between listener and object that we call music. This instrument is the creative principle of music which is inherent to all beings. 
+                        </p>
+                        <p>
+                            As the active listener becomes trained, the object can transform from a mere physical substance to something likeemotions, ideas, and states of experience. This ongoing relationship led to the discovery of things such as the major scale, rhythm, chanting, etc.
                         </p>
                     </div>
                 </div>
             </section>
+            
+            <!-- THE THREE ACTS -->
+            <section id="acts-method" class="border-y border-divider py-12">
+                <h3 class="text-3xl font-bold text-primary-accent uppercase tracking-wider text-center mb-12">
+                    The Three Acts of Inner Music
+                </h3>
+                <div class="grid md:grid-cols-3 gap-10 text-center text-xl">
+                    
+                    <div id="act-1" class="space-y-4 p-6 border border-divider hover:border-primary-accent transition duration-300 cursor-pointer" onclick="navigateTo('home', 'act-1')">
+                        <p class="text-5xl font-extrabold text-gold-accent tracking-tighter">I</p>
+                        <p class="text-2xl font-bold uppercase tracking-wider text-light-text">Act 1: The Active Listener</p>
+                        <p class="text-muted-text">
+                            Training the Active Listener to become an instrument. The difference between a trained and untrained ear is the ability to resonate like an instrument as you hear the sound.
+                        </p>
+                    </div>
 
-            <!-- Central Navigation / The Three Acts as a Divider -->
-            <nav id="acts" class="text-center text-2xl tracking-widest uppercase border-y border-divider py-6">
-                <!-- Using an anchor link now works inside the single page view -->
-                <a href="#philosophy-details" class="px-5 hover:text-primary-accent transition duration-150">ACT I - LISTENER</a>
-                <span class="text-primary-accent/50 mx-4">×</span>
-                <a href="#practice-details" class="px-5 hover:text-primary-accent transition duration-150">ACT II - RESPONSE</a>
-                <span class="text-primary-accent/50 mx-4">×</span>
-                <a href="#friction-details" class="px-5 hover:text-primary-accent transition duration-150">ACT III - INTENTION</a>
-            </nav>
+                    <div id="act-2" class="space-y-4 p-6 border border-divider hover:border-primary-accent transition duration-300 cursor-pointer" onclick="navigateTo('home', 'act-2')">
+                        <p class="text-5xl font-extrabold text-gold-accent tracking-tighter">II</p>
+                        <p class="text-2xl font-bold uppercase tracking-wider text-light-text">Act 2: Body Responsiveness</p>
+                        <p class="text-muted-text">
+                            Developing the ability to respond, in the body, to the music outside and inside. This is done by training the body to follow the gravity of rhythm and sequential patterns (notes, scales, chords).
+                        </p>
+                    </div>
 
-            <!-- Main Body: Two Column Content (Philosophy & Practice) -->
-            <section class="grid md:grid-cols-2 gap-20">
+                    <div id="act-3" class="space-y-4 p-6 border border-divider hover:border-primary-accent transition duration-300 cursor-pointer" onclick="navigateTo('home', 'act-3')">
+                        <p class="text-5xl font-extrabold text-gold-accent tracking-tighter">III</p>
+                        <p class="text-2xl font-bold uppercase tracking-wider text-light-text">Act 3: Intentionality</p>
+                        <p class="text-muted-text">
+                            The combination of listening and body response creates intentionality. We explore aesthetic choices and complex theoretical constructs to fine-tune the relationships we have with sound.
+                        </p>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- SECTION II & III: CORE PHILOSOPHY & PRACTICE -->
+            <section class="grid md:grid-cols-2 gap-20 pt-16">
                 
-                <!-- Left Column: Inner Music Philosophy -->
-                <div id="philosophy-details" class="space-y-8">
+                <div id="philosophy-details" class="space-y-10">
                     <h3 class="text-2xl uppercase tracking-widest text-primary-accent mb-8 border-b border-divider pb-3">
-                        About the Inner Music
+                        II. Inner Music / V. The Aim
                     </h3>
                     <div class="space-y-6 text-xl text-light-text">
-                        <p>Inner Music trains this **original connection**.</p>
-                        <p>It teaches the **body to hear** and the **ear to feel**.</p>
-                        <p>Every exercise begins with **presence and awareness**, not technique.</p>
-                        <p>You learn to move as sound moves, to respond as nature responds — naturally, precisely, without hesitation.</p>
+                        <p>Inner Music trains this original connection.</p>
+                        <p>It teaches the body to hear and the ear to feel.</p>
+                        <p>Every exercise begins with presence and awareness, not technique. You learn to move as sound moves, to respond as nature responds — naturally, precisely, without hesitation.</p>
                         <p>As your perception sharpens, the music starts to shape itself. Theory and structure emerge as reflections of what you already sense.</p>
                     </div>
 
-                    <div class="mt-10 p-8 border border-divider">
+                    <div class="mt-10 p-8 border border-divider bg-dark-card/50">
                         <h4 class="text-xl uppercase tracking-wider text-primary-accent mb-4">
-                            The Aim
+                            V. AIM: Tuning the Instrument
                         </h4>
-                        <div class="text-xl italic space-y-3 text-light-text">
-                            <p>To tune the human instrument.</p>
-                            <p>To restore the physical and emotional intelligence that gives rise to music.</p>
-                            <p>To make creation an act of will.</p>
-                        </div>
+                        <ul class="text-xl italic space-y-3 text-light-text">
+                            <li><span class="goth-marker"></span>To tune the human instrument.</li>
+                            <li><span class="goth-marker"></span>To restore the physical and emotional intelligence that gives rise to music.</li>
+                            <li><span class="goth-marker"></span>To make creation an act of will.</li>
+                        </ul>
                     </div>
                 </div>
 
-                <!-- Right Column: Practice & What to Expect -->
-                <div id="practice-details" class="space-y-8">
+                <div id="practice-details" class="space-y-10">
                     <h3 class="text-2xl uppercase tracking-widest text-primary-accent mb-8 border-b border-divider pb-3">
-                        Latest Practices and Gains
+                        III. Foundational Practice
                     </h3>
                     <ul class="space-y-5 text-xl text-light-text">
-                        <li class="border-b border-divider pb-3">
+                        <li class="pb-3 border-b border-divider">
                             <span class="goth-marker"></span>
-                            <strong class="text-primary-accent">Resonance</strong>: Feeling vibration in the body and learning to respond through movement.
+                            <strong class="text-primary-accent">Listening</strong> — Developing sensitivity to tone, space, rhythm, and silence.
                         </li>
-                        <li class="border-b border-divider pb-3">
+                        <li class="pb-3 border-b border-divider">
                             <span class="goth-marker"></span>
-                            <strong class="text-primary-accent">Listening</strong>: Developing sensitivity to tone, space, rhythm, and silence.
+                            <strong class="text-primary-accent">Resonance</strong> — Feeling vibration in the body and learning to respond through movement.
                         </li>
-                        <li class="border-b border-divider pb-3">
+                        <li class="pb-3 border-b border-divider">
                             <span class="goth-marker"></span>
-                            <strong class="text-primary-accent">Expression</strong>: Exploring how awareness becomes sound through your chosen instrument.
+                            <strong class="text-primary-accent">Expression</strong> — Exploring how awareness becomes sound through your chosen instrument.
                         </li>
                         <li class="pb-3">
                             <span class="goth-marker"></span>
-                            <strong class="text-primary-accent">Reflection</strong>: Refining your aesthetic judgment.
+                            <strong class="text-primary-accent">Reflection</strong> — Refining your aesthetic judgment by noticing what feels aligned, what feels false, what asks to return.
                         </li>
                     </ul>
                     
-                    <h4 class="text-xl uppercase tracking-wider text-primary-accent pt-8 border-t border-divider mb-4">
-                        What to Expect
+                    <h4 class="text-2xl uppercase tracking-wider text-primary-accent pt-8 border-t border-divider mb-4 font-bold">
+                        IV. What To Expect
                     </h4>
                     <ul class="space-y-3 text-xl text-light-text pl-5">
-                        <li><span class="goth-marker"></span>Growth of ear and musical perception.</li>
-                        <li><span class="goth-marker"></span>Cultivation of taste and creative instinct.</li>
-                        <li><span class="goth-marker"></span>Theoretical understanding as it becomes relevant.</li>
+                        <li><span class="goth-marker"></span>Developed Ear and capacity for active listening.</li>
+                        <li><span class="goth-marker"></span>Refined aesthetic taste (become aware of the choices you can make and how to achieve them).</li>
+                        <li><span class="goth-marker"></span>Knowledge of music theory (as needed—assessed based on student’s needs).</li>
+                        <li><span class="goth-marker"></span>Connection between creativity and intention so that each time you play music you can be inspired.</li>
                         <li><span class="goth-marker"></span>The ability to play songs of your liking.</li>
+                        <li><span class="goth-marker"></span>Ongoing support with technical issues relevant to playing, singing, creating, and/or producing music.</li>
                     </ul>
                 </div>
             </section>
 
-            <!-- Physics & Friction Section (The Gravity) -->
-            <section id="friction-details" class="space-y-16 py-16 border-t-2 border-primary-accent/50 mt-16">
+            <!-- SECTION: PHYSICS AND FRICTION -->
+            <section id="physics-friction" class="space-y-16 py-16 border-t-2 border-primary-accent/50 mt-16">
                 <h2 class="text-4xl font-bold text-primary-accent uppercase tracking-wider text-center">
-                    Friction: The Artist's Gravity
+                    The Meeting Point: Physics & Psychology
                 </h2>
                 <div class="grid md:grid-cols-2 gap-12">
                     
-                    <!-- Friction Text -->
                     <div class="space-y-6 text-2xl leading-relaxed text-light-text p-8 border border-divider">
+                        <h3 class="text-3xl font-bold text-gold-accent mb-4">Physics of Sound</h3>
                         <p>
-                            Every artist must become well-versed in the art of <strong class="text-primary-accent">FRICTION</strong>.
+                            The harmonic overtone series is the foundational meeting point between psychology and physics. Musical notes are tuned to the natural resonance frequency responses apparent all around in nature.
+                        </p>
+                        <p>
+                            The instrument is one piece of the puzzle. The way it’s played, the emotional state of the player, the room it resonates in, and how the musician is listening to the sound echoing back all create an intricate relationship that gives rise to the creative principle.
+                        </p>
+                        <p class="italic text-primary-accent mt-4 font-light text-xl">
+                            This won’t be a course on the math, but an overview of the fundamental principles that are relevant for a musician to know.
+                        </p>
+                    </div>
+                    
+                    <div id="friction-box" class="space-y-6 text-2xl leading-relaxed text-light-text p-8 border border-divider">
+                        <h3 class="text-3xl font-bold text-gold-accent mb-4">The Art of Friction</h3>
+                        <p>
+                            Every artist must become well-versed in the art of FRICTION.
                         </p>
                         <p>
                             No authentic and self-expressive work of art was written without some sort of friction building the gravity for it.
@@ -231,40 +259,19 @@
                             With Inner Music, we build sufficient understanding of how to direct the frustration of learning and creating toward the goal of <strong class="text-primary-accent">self-expression and artistry</strong>.
                         </p>
                     </div>
-                    
-                    <!-- Physics Text -->
-                    <div class="space-y-6 text-2xl leading-relaxed text-light-text p-8 border border-divider">
-                        <p>
-                            The **harmonic overtone series** is the foundational meeting point between psychology and physics. Every sound echoes to musical principles that connect to various human emotions.
-                        </p>
-                        <p>
-                            The way an instrument is played, the **emotional state of the player**, and how the musician listens to the sound create an intricate relationship that gives rise to the creative principle.
-                        </p>
-                        <p class="italic text-primary-accent mt-4 font-light text-xl">
-                            If you wish to hear more about the physics of sound in your session, let me know.
-                        </p>
-                    </div>
                 </div>
-            </section>
 
-            <!-- Call to Action -->
-            <section class="text-center py-24 border-t border-divider" id="call-to-action">
-                <p class="text-3xl italic font-light text-muted-text mb-10">
-                    Ready to tune your human instrument?
-                </p>
-                <!-- This button now calls the navigation function -->
-                <button onclick="navigateTo('contact')" class="inline-block px-16 py-6 text-2xl font-bold uppercase rounded-none tracking-wider transition-all duration-300 
+                <div class="text-center">
+                    <button onclick="navigateTo('contact')" class="inline-block px-16 py-6 text-2xl font-bold uppercase rounded-none tracking-wider transition-all duration-300 
                                      bg-light-text text-dark-bg border-2 border-light-text 
                                      hover:bg-dark-bg hover:text-light-text hover:border-primary-accent
                                      focus:outline-none focus:ring-4 focus:ring-primary-accent/50">
-                    Book a Consultation
-                </button>
+                        Book a Consultation
+                    </button>
+                </div>
             </section>
         </div>
 
-        <!-- ========================================================== -->
-        <!-- CONTACT/CONSULTATION PAGE CONTENT (From original consultation.html) -->
-        <!-- ========================================================== -->
         <div id="contact-page" class="space-y-12 hidden">
             <div id="contact-form-container" class="content-block bg-dark-card p-8 md:p-12 border border-primary-accent mx-auto">
                 <h2 class="text-4xl font-bold text-primary-accent uppercase tracking-wider mb-12 text-center">
@@ -345,9 +352,9 @@
 
                     <div class="pt-8 text-center">
                         <button type="submit" id="submit-button" class="w-full md:w-auto inline-block px-16 py-6 text-2xl font-bold uppercase rounded-none tracking-wider transition-all duration-300 
-                                                bg-light-text text-dark-bg border-2 border-light-text 
-                                                hover:bg-dark-bg hover:text-light-text hover:border-primary-accent
-                                                focus:outline-none focus:ring-4 focus:ring-primary-accent/50">
+                                     bg-light-text text-dark-bg border-2 border-light-text 
+                                     hover:bg-dark-bg hover:text-light-text hover:border-primary-accent
+                                     focus:outline-none focus:ring-4 focus:ring-primary-accent/50">
                             Send Inquiry
                         </button>
                     </div>
@@ -355,7 +362,6 @@
             </div>
         </div>
 
-        <!-- SHARED FOOTER -->
         <footer class="bg-dark-card py-10 mt-24">
             <div class="max-w-6xl mx-auto px-12 text-center text-xl tracking-wider text-muted-text">
                 &copy; 2025 Sangre House Consulting. All Rights Reserved.
@@ -403,9 +409,15 @@
                 
                 // If a section is specified, scroll to it after a short delay
                 if (sectionId) {
-                    setTimeout(() => {
-                        document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
-                    }, 50);
+                    // Use requestAnimationFrame for smoother scrolling after DOM update
+                    requestAnimationFrame(() => {
+                        const targetElement = document.getElementById(sectionId);
+                        if (targetElement) {
+                            // Scroll with an offset for better viewing below the header
+                            const y = targetElement.getBoundingClientRect().top + window.scrollY - 100; 
+                            window.scrollTo({ top: y, behavior: 'smooth' });
+                        }
+                    });
                 }
 
             } else if (page === 'contact') {
@@ -421,25 +433,33 @@
         // --- Renders navigation links based on current page ---
         const renderNavigation = () => {
             mainNav.innerHTML = ''; // Clear existing nav
+            
+            let linksHTML = '';
+
             if (currentPage === 'home') {
-                // Home Page Navigation (Internal Anchors)
-                mainNav.innerHTML = `
-                    <a href="#" onclick="event.preventDefault(); navigateTo('home', 'philosophy-details')" class="block hover:text-primary-accent transition duration-150">[ Philosophy ]</a>
-                    <a href="#" onclick="event.preventDefault(); navigateTo('home', 'practice-details')" class="block hover:text-primary-accent transition duration-150">[ The Acts ]</a>
-                    <a href="#" onclick="event.preventDefault(); navigateTo('home', 'friction-details')" class="block hover:text-primary-accent transition duration-150">[ Gravity ]</a>
+                // On the Home page, show the Contact link
+                linksHTML = `
+                    <a href="#" onclick="navigateTo('contact')" class="block hover:text-primary-accent transition duration-150">
+                        Book Consultation
+                    </a>
                 `;
             } else if (currentPage === 'contact') {
-                // Contact Page Navigation (Back to Home)
-                mainNav.innerHTML = `
-                    <a href="#" onclick="event.preventDefault(); navigateTo('home')" class="block hover:text-primary-accent transition duration-150">[ Back to Info ]</a>
+                // On the Contact page, show the Home link
+                linksHTML = `
+                    <a href="#" onclick="navigateTo('home')" class="block hover:text-primary-accent transition duration-150">
+                        Home / Philosophy
+                    </a>
                 `;
             }
+            
+            mainNav.innerHTML = linksHTML;
         };
+
 
         // --- Form Submission Handler (MOCK for Formspree success) ---
         document.getElementById('contact-form').addEventListener('submit', (e) => {
-            // Note: We prevent the actual Formspree submission here to demonstrate 
-            // the success state immediately within the Canvas preview.
+            // Note: The action attribute on the <form> handles the actual submission.
+            // We use preventDefault() here to show the mock success modal in the preview.
             e.preventDefault(); 
             
             const name = document.getElementById('full_name').value;
@@ -448,8 +468,8 @@
 
             // Mock submission success message
             const successMessage = `
-                Thank you, ${name}! Your inquiry for the **${packageType}** has been received.<br><br>
-                We will review your requested availability and send an email to **${email}** within 24-48 hours to confirm the next steps and initial session time.
+                Thank you, ${name}! Your inquiry for the ${packageType || 'Initial Session'} has been received.<br><br>
+                We will review your requested availability and send an email to ${email} within 24-48 hours to confirm the next steps and initial session time.
             `;
 
             showModal('Inquiry Sent', successMessage, true, () => {
