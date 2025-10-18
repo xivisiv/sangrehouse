@@ -1,123 +1,128 @@
-// --- Tailwind Configuration Script (Normally in the HTML head) ---
-tailwind.config = {
-    theme: {
-        extend: {
-            fontFamily: {
-                // Standardize all font utilities to EB Garamond for the consistent look
-                sans: ['EB Garamond', 'serif'],
-                serif: ['EB Garamond', 'serif'], 
-                mono: ['EB Garamond', 'serif'], 
-            },
-            colors: {
-                // Deep Crimson Background (Slightly darker for the main body)
-                'dark-bg': '#5C0000', 
-                // Darker Card Color (Subtle contrast against the background)
-                'dark-card': '#4A0000',
-                // Accent Color (Silver/Light Gray for contrast)
-                'primary-accent': '#C0C0C0', 
-                // Text and Highlight Color
-                'light-text': '#F0F0F0', 
-                'muted-text': '#E0E0E0', 
-                'divider': '#A00000', // Slightly lighter crimson for dividers
-                'gold-accent': '#F0F0F0', // Gold for highlights (used in contact)
-            },
-        }
-    }
-}
-
-
-// --- Main Router and Logic Script (Normally at the end of the body) ---
-// --- Router State ---
-let currentPage = 'home';
+// --- Router State and Elements (Must be available to the global `MapsTo` function) ---
 const homePage = document.getElementById('home-page');
 const contactPage = document.getElementById('contact-page');
 const actDetailsContainer = document.getElementById('act-details-container');
+const mainContentWrapper = document.getElementById('main-content-wrapper');
+
+// Detail page elements (can be null before DOMContentLoaded, but we check their existence)
 const act1Detail = document.getElementById('act-1-detail');
 const act2Detail = document.getElementById('act-2-detail');
 const act3Detail = document.getElementById('act-3-detail');
 const mainNav = document.getElementById('main-nav');
-const pageTitle = document.getElementById('page-title');
+const pageTitle = document.querySelector('title'); // Use querySelector('title') for the page title tag
 
-// Form Elements
-const form = document.getElementById('contact-form');
-const submitButton = document.getElementById('submit-button');
-const formspreeEndpoint = "https://formspree.io/f/xzzjogqq"; // The original Formspree endpoint
-const formspreeCustomKey = 'REPLACE_WITH_YOUR_FORMSPREE_CUSTOM_KEY'; 
+// Form and Modal Elements (Initialized in DOMContentLoaded)
+let form;
+let submitButton;
+let modal;
+let modalTitle;
+let modalMessage;
+let modalCloseButton;
+
+// Formspree setup (Replace with your actual endpoint)
+const formspreeEndpoint = "https://formspree.io/f/xzzjogqq";
 
 
 // --- Utility: Show/Hide Modal ---
 const showModal = (title, message, isSuccess = false, callback = null) => {
-    document.getElementById('modal-title').textContent = title;
-    document.getElementById('modal-message').innerHTML = message;
-    document.getElementById('custom-modal').classList.remove('hidden');
-    document.getElementById('custom-modal').classList.add('flex');
+    // Check if modal elements exist before trying to update them
+    if (!modal || !modalTitle || !modalMessage || !modalCloseButton) return;
+    
+    modalTitle.textContent = title;
+    modalMessage.innerHTML = message;
+    
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    
     // Use tailwind classes for color management
-    document.getElementById('modal-title').classList.remove('text-primary-accent', 'text-gold-accent');
-    document.getElementById('modal-title').classList.add(isSuccess ? 'text-gold-accent' : 'text-primary-accent');
+    modalTitle.classList.remove('text-primary-accent', 'text-gold-accent');
+    modalTitle.classList.add(isSuccess ? 'text-gold-accent' : 'text-primary-accent');
     
     // Set up the close button action
-    const closeButton = document.getElementById('custom-modal').querySelector('button');
-    closeButton.onclick = () => {
-        document.getElementById('custom-modal').classList.add('hidden');
-        document.getElementById('custom-modal').classList.remove('flex');
+    modalCloseButton.onclick = () => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
         if (callback) {
             callback();
         }
     };
 };
 
-// --- Core Router Function ---
-const navigateTo = (page) => {
-    currentPage = page;
-    window.scrollTo(0, 0); // Always scroll to top on page change
-
-    // 1. Hide all main containers
-    homePage.classList.add('hidden');
-    contactPage.classList.add('hidden');
-    actDetailsContainer.classList.add('hidden');
-    act1Detail.classList.add('hidden');
-    act2Detail.classList.add('hidden');
-    act3Detail.classList.add('hidden');
-    
-    // 2. Update Visibility based on new page
-    let newTitle = "INNER MUSIC - Sangre House Consulting";
-
-    if (page === 'home') {
-        homePage.classList.remove('hidden');
-        newTitle = "INNER MUSIC - Method Overview";
-    } else if (page === 'contact') {
-        contactPage.classList.remove('hidden');
-        newTitle = "INNER MUSIC - Booking Inquiry";
-    } else if (page === 'act-1-detail') {
-        actDetailsContainer.classList.remove('hidden');
-        act1Detail.classList.remove('hidden');
-        newTitle = "INNER MUSIC - ACT I: ACTIVE LISTENING";
-    } else if (page === 'act-2-detail') {
-        actDetailsContainer.classList.remove('hidden');
-        act2Detail.classList.remove('hidden');
-        newTitle = "INNER MUSIC - ACT II: INTERNAL INSTRUMENT";
-    } else if (page === 'act-3-detail') {
-        actDetailsContainer.classList.remove('hidden');
-        act3Detail.classList.remove('hidden');
-        newTitle = "INNER MUSIC - ACT III: INTENTIONALITY";
-    }
-
-    pageTitle.textContent = newTitle;
-    updateNavActiveState(page);
-};
 
 // --- Navigation Active State Handler (Simple for two main links) ---
 const updateNavActiveState = (page) => {
-    // Rebuild the nav links to include the current active page
-    mainNav.innerHTML = `
-        <a href="#" class="block ${page === 'home' || page.includes('act') ? 'text-light-text font-bold' : 'text-muted-text'} hover:text-light-text transition-colors duration-200" onclick="navigateTo('home')">Method</a>
-        <a href="#" class="block ${page === 'contact' ? 'text-light-text font-bold' : 'text-muted-text'} hover:text-light-text transition-colors duration-200" onclick="navigateTo('contact')">Inquiry</a>
-    `;
+    // Note: The navigation buttons use onclick directly in the HTML and do not need
+    // to be dynamically rebuilt unless you want to add an 'active' style.
+    // Since the HTML already uses `onclick="navigateTo('page-id')"` this function 
+    // is simplified to manage a theoretical 'active' visual state on the buttons if needed.
+    // For now, we rely on the direct onclick in the HTML for navigation.
+    
+    // We can hide/show the Contact button logic here if needed, but the original HTML is static.
 };
+
+
+// --- Core Router Function (Exposed to the global scope via `window` or default definition) ---
+window.navigateTo = (page) => {
+    // 1. Hide all main containers
+    const pagesToHide = [homePage, contactPage, actDetailsContainer, act1Detail, act2Detail, act3Detail].filter(Boolean);
+    pagesToHide.forEach(el => el.classList.add('hidden'));
+
+    let newTitle = "INNER MUSIC - Sangre House Consulting";
+    let targetPage = page;
+    
+    // If navigating via the header click, targetPage is 'home'
+    if (page === 'home') {
+        targetPage = 'home-page'; 
+    }
+    // If navigating from the nav bar 'Book Session'
+    if (page === 'contact-page') {
+        targetPage = 'contact-page';
+    }
+
+
+    // 2. Update Visibility based on new page
+    if (targetPage === 'home-page') {
+        homePage.classList.remove('hidden');
+        newTitle = "INNER MUSIC - Method Overview";
+    } else if (targetPage === 'contact-page') {
+        contactPage.classList.remove('hidden');
+        newTitle = "INNER MUSIC - Booking Inquiry";
+    } else if (targetPage === 'act-1-detail' && actDetailsContainer && act1Detail) {
+        actDetailsContainer.classList.remove('hidden');
+        act1Detail.classList.remove('hidden');
+        newTitle = "INNER MUSIC - ACT I: ACTIVE LISTENING";
+    } else if (targetPage === 'act-2-detail' && actDetailsContainer && act2Detail) {
+        actDetailsContainer.classList.remove('hidden');
+        act2Detail.classList.remove('hidden');
+        newTitle = "INNER MUSIC - ACT II: INTERNAL INSTRUMENT";
+    } else if (targetPage === 'act-3-detail' && actDetailsContainer && act3Detail) {
+        actDetailsContainer.classList.remove('hidden');
+        act3Detail.classList.remove('hidden');
+        newTitle = "INNER MUSIC - ACT III: INTENTIONALITY";
+    } else {
+        // Fallback to home if page ID is unrecognized (e.g., from header click)
+        homePage.classList.remove('hidden');
+    }
+
+    // 3. Update title and scroll
+    if (pageTitle) {
+        pageTitle.textContent = newTitle;
+    }
+    
+    if (mainContentWrapper) {
+        mainContentWrapper.scrollIntoView({ behavior: 'smooth' }); // Scroll to the content area
+    }
+    
+    updateNavActiveState(targetPage);
+};
+
 
 // --- Form Submission Handler (Simulated Formspree Integration) ---
 const handleFormSubmission = async (event) => {
     event.preventDefault();
+
+    if (!form || !submitButton) return;
+
     submitButton.textContent = 'Sending...';
     submitButton.disabled = true;
 
@@ -148,7 +153,7 @@ const handleFormSubmission = async (event) => {
 
 
     try {
-        // Simulate Formspree submission
+        // Formspree submission (Ensure this is set up correctly in a real environment)
         const response = await fetch(formspreeEndpoint, {
             method: 'POST',
             headers: {
@@ -157,27 +162,26 @@ const handleFormSubmission = async (event) => {
             },
             body: JSON.stringify({
                 _subject: `New Inner Music Inquiry from ${data['Full Name']}`,
-                _cc: data['Email'], // Optionally CC the sender
-                ...data, // Include original form data
+                _cc: data['Email'],
+                ...data,
                 'Inquiry Details': messageBody 
             })
         });
 
         if (response.ok) {
-            showModal('Inquiry Sent', 'Thank you for your interest in Inner Music. Your consultation inquiry has been successfully sent. We will review your details and be in touch via email within 48 hours to confirm scheduling and payment.', true, () => {
+            showModal('INQUIRY SENT', 'Thank you! Your inquiry has been successfully sent. We will review your details and be in touch via email within 48 hours to confirm scheduling and payment.', true, () => {
                 form.reset();
-                navigateTo('home');
+                navigateTo('home-page'); // Navigate back to the main page
             });
         } else {
-            // This handles non-OK status codes (e.g., 400, 500) from Formspree
-            const errorData = await response.json();
-            const errorMessage = errorData.error ? `Server Error: ${errorData.error}` : 'An unknown error occurred while trying to send the inquiry.';
-            showModal('Submission Failed', `We could not process your inquiry. Please check your network connection and try again. ${errorMessage}`, false);
+            // Handle Formspree-specific error response
+            const errorText = await response.text();
+            showModal('SUBMISSION FAILED', `We could not process your inquiry. Server status: ${response.status}. Error details: ${errorText.substring(0, 100)}`, false);
         }
     } catch (error) {
-        // This handles critical network errors (e.g., fetch failed)
+        // Handle critical network error
         console.error('Submission Error:', error);
-        showModal('Submission Failed', `A critical network error occurred: ${error.message}. Please try again later.`, false);
+        showModal('SUBMISSION FAILED', `A critical network error occurred: ${error.message}. Please check your connection and try again later.`, false);
     } finally {
         submitButton.textContent = 'Send Inquiry';
         submitButton.disabled = false;
@@ -186,10 +190,20 @@ const handleFormSubmission = async (event) => {
 
 
 // --- Initialization ---
-window.onload = function() {
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize elements used by the modal/form handler
+    form = document.getElementById('contact-form');
+    submitButton = document.getElementById('submit-button');
+    modal = document.getElementById('custom-modal');
+    modalTitle = document.getElementById('modal-title');
+    modalMessage = document.getElementById('modal-message');
+    modalCloseButton = document.getElementById('modal-close-button');
+
     // Set up form listener (Formspree simulation)
-    form.addEventListener('submit', handleFormSubmission);
+    if (form) {
+        form.addEventListener('submit', handleFormSubmission);
+    }
     
-    // Set initial page view
-    navigateTo('home'); 
-}
+    // Set initial page view to ensure 'home-page' is visible on load
+    navigateTo('home-page'); 
+});

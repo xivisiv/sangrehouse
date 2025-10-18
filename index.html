@@ -12,12 +12,10 @@
     <link rel="stylesheet" href="style.css">
     
     <script>
-        // NOTE: This MUST remain inline or in an external JS file loaded BEFORE the body content.
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        // Using 'serif' as the fallback for Garamond
                         sans: ['EB Garamond', 'serif'],
                         serif: ['EB Garamond', 'serif'], 
                         mono: ['EB Garamond', 'serif'], 
@@ -35,95 +33,6 @@
             }
         }
     </script>
-    <script>
-        // * NAVIGATION LOGIC: Function to switch between main content pages and act details. *
-
-        function navigateTo(target) {
-            const mainPages = ['home-page', 'contact-page', 'act-details-container'];
-            const actDetails = ['act-1-detail', 'act-2-detail', 'act-3-detail'];
-            
-            // Hide all main content containers
-            mainPages.forEach(id => {
-                document.getElementById(id).classList.add('hidden');
-            });
-
-            // Hide all act detail containers
-            actDetails.forEach(id => {
-                const element = document.getElementById(id);
-                if (element) {
-                    element.classList.add('hidden');
-                }
-            });
-
-            if (mainPages.includes(target)) {
-                // Show a main page
-                document.getElementById(target).classList.remove('hidden');
-
-            } else if (actDetails.includes(target)) {
-                // Show the act details wrapper and the specific act detail
-                document.getElementById('act-details-container').classList.remove('hidden');
-                document.getElementById(target).classList.remove('hidden');
-
-            } else if (target === 'home') {
-                // Default back to the home page (handles header click)
-                document.getElementById('home-page').classList.remove('hidden');
-            }
-            
-            // Scroll to the top of the content area on navigation
-            document.getElementById('main-content-wrapper').scrollIntoView({ behavior: 'smooth' });
-            
-            // The custom modal button was missing a call to remove 'flex'
-            // The modal itself needs to remove 'flex' and re-add 'hidden' to hide
-            const modal = document.getElementById('custom-modal');
-            modal.classList.add('hidden');
-            modal.classList.remove('flex');
-        }
-
-        // * FORM SUBMISSION LOGIC: Function to handle form submission (e.g., display a success message) *
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const form = document.getElementById('contact-form');
-            const modal = document.getElementById('custom-modal');
-            const modalTitle = document.getElementById('modal-title');
-            const modalMessage = document.getElementById('modal-message');
-
-            form.addEventListener('submit', function(event) {
-                event.preventDefault();
-
-                // Basic validation check for demonstration (browser built-in validation should handle most cases)
-                if (form.checkValidity()) {
-                    // In a real application, you would send the form data here (e.g., using fetch API)
-                    console.log('Form Submitted!', new FormData(form));
-
-                    // Display success modal
-                    modalTitle.textContent = 'INQUIRY SENT';
-                    modalMessage.textContent = 'Thank you! Your inquiry has been successfully sent. We will review your preferences and contact you via email within 1-2 business days to schedule your initial session.';
-                    
-                    // Show modal
-                    modal.classList.remove('hidden');
-                    modal.classList.add('flex'); // Add flex to center the modal
-                    
-                    // Reset the form after successful submission
-                    form.reset();
-                    
-                } else {
-                    // Display error modal if form is not valid (though browser validation should prevent this)
-                    modalTitle.textContent = 'ERROR';
-                    modalMessage.textContent = 'Please ensure all required fields are filled out and correct before submitting.';
-                    modal.classList.remove('hidden');
-                    modal.classList.add('flex');
-                }
-            });
-            
-            // Fix for the modal close button to hide it properly
-            const closeModalButton = modal.querySelector('button');
-            closeModalButton.onclick = function() {
-                modal.classList.add('hidden');
-                modal.classList.remove('flex'); // Remove flex when hiding
-            };
-        });
-
-    </script>
 </head>
 <body class="bg-dark-bg text-light-text selection:bg-light-text selection:text-dark-bg transition-colors duration-300">
 
@@ -131,7 +40,7 @@
         <div class="bg-dark-card border-4 border-primary-accent p-8 md:p-12 w-full max-w-lg space-y-6">
             <h3 id="modal-title" class="text-4xl font-bold text-gold-accent uppercase tracking-wider"></h3>
             <p id="modal-message" class="text-xl text-light-text"></p>
-            <button onclick="document.getElementById('custom-modal').classList.add('hidden'); document.getElementById('custom-modal').classList.remove('flex');" 
+            <button id="modal-close-button"
                     class="block w-full px-6 py-3 text-2xl font-bold uppercase rounded-none tracking-wider transition-colors duration-200 
                             bg-primary-accent text-dark-bg hover:bg-light-text">
                 Close
@@ -164,7 +73,9 @@
         <div id="main-content-wrapper">
             
             <div id="home-page" class="space-y-24">
-                
+
+
+                <!-- THE METHOD TO MADNESS SECTION -->
                 <section id="method">
                     <div class="bg-dark-card p-8 md:p-12 border border-primary-accent">
                         <h2 class="text-2xl uppercase tracking-widest text-primary-accent mb-6 font-bold">
@@ -182,6 +93,7 @@
                     </div>
                 </section>
                 
+                <!-- THE THREE ACTS OF INNER MUSIC SECTION -->
                 <section id="acts-method" class="border-y border-divider py-12">
                     <h3 class="text-3xl font-bold text-primary-accent uppercase tracking-wider text-center mb-12">
                         The Three Acts of Inner Music
@@ -214,119 +126,121 @@
 
                     </div>
                 </section>
+                
+                <!-- AIM SECTION -->
+                <section class="space-y-16 pt-16">
 
-                <section class="grid md:grid-cols-2 gap-20 pt-16">
-                    
-                    <div id="philosophy-details" class="space-y-10">
-                        <h3 class="text-2xl uppercase tracking-widest text-primary-accent mb-8 border-b border-divider pb-3">
-                            Inner Music
+                    <div id="aim-centered-top" class="text-center mx-auto max-w-4xl">
+                        <h3 class="text-4xl uppercase tracking-widest text-primary-accent mb-6 border-b border-divider pb-3 font-bold">
+                            AIM
                         </h3>
-                        <div class="space-y-6 text-xl text-light-text">
-                            <p>Inner Music trains this original connection.</p>
-                            <p>It teaches the body to hear and the ear to feel.</p>
-                            <p>Every exercise begins with presence and awareness, not technique. You learn to move as sound moves, to respond as nature responds — naturally, precisely, without hesitation.</p>
-                            <p>As your perception sharpens, the music starts to shape itself. Theory and structure emerge as reflections of what you already sense.</p>
-                        </div>
+                        <p class="text-2xl italic text-light-text detail-content p-8 border-2 border-primary-accent bg-dark-card/75 shadow-lg">
+                            My aim is to fully equip students with the necessary building blocks to connect themselves to the music inside sound — through whichever instrument of their choosing. And as this natural relationship is empowered through the tuning of the body to music, we explore more complex and intricate aspects of music as they become necessary.
+                        </p>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-20">
                         
-                        <div class="mt-10 p-8 border border-divider bg-dark-card/50">
-                            <h4 class="text-xl uppercase tracking-wider text-primary-accent mb-4 font-bold">
-                                ULTIMATE AIM
-                            </h4>
-                            <ul class="space-y-2 text-xl italic text-light-text list-disc list-inside detail-content">
-                                <li>To nurture the inner instrument.</li>
-                                <li>To hold sacred the physical and emotional intelligence that gives rise to music.</li>
-                                <li>To make creation an act of will.</li>
+                        <div id="practice" class="space-y-6">
+                            <h3 class="text-3xl uppercase tracking-widest text-primary-accent mb-4 border-b border-divider pb-3 font-bold">
+                                PRACTICE
+                            </h3>
+                            <ul class="space-y-5 text-xl text-light-text">
+                                <li class="pb-3 border-b border-divider">
+                                    <strong class="text-primary-accent">Listening</strong> — developing sensitivity to tone, space, rhythm, and silence.
+                                </li>
+                                <li class="pb-3 border-b border-divider">
+                                    <strong class="text-primary-accent">Resonance</strong> — feeling vibration in the body and learning to respond through movement.
+                                </li>
+                                <li class="pb-3 border-b border-divider">
+                                    <strong class="text-primary-accent">Expression</strong> — exploring how awareness becomes sound through your chosen instrument.
+                                </li>
+                                <li class="pb-3">
+                                    <strong class="text-primary-accent">Reflection</strong> — refining your aesthetic judgment by noticing what feels aligned, what feels false, what asks to return.
+                                </li>
                             </ul>
                         </div>
-                        <div class="mt-10 p-8 border border-divider bg-dark-card/50">
-                            <h4 class="text-xl uppercase tracking-wider text-primary-accent mb-4">
-                                AIM
+
+                        <div id="what-to-expect" class="space-y-10">
+                            <h3 class="text-3xl uppercase tracking-widest text-primary-accent mb-8 border-b border-divider pb-3 font-bold">
+                                WHAT TO EXPECT
+                            </h3>
+                            <ul class="space-y-5 text-xl text-light-text pl-5 list-disc list-outside">
+                                <li>Developed ear and capacity for active listening.</li>
+                                <li>Expanded aesthetic palette and knowledge of the choices you can make.</li>
+                                <li>Knowledge of music theory (as needed—assessed based on student’s needs).</li>
+                                <li>Establishing the connection between creativity and intentionality.</li>
+                                <li>The ability to play songs of your liking.</li>
+                                <li>Ongoing support with technical issues relevant to playing, singing, creating, and/or producing music.</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div id="ultimate-aim-centered" class="md:col-span-2 text-center pt-16">
+                        <div class="mx-auto max-w-2xl p-10 border-4 border-primary-accent bg-dark-card/75 shadow-lg">
+                            <h4 class="text-3xl uppercase tracking-widest text-gold-accent mb-6 font-bold">
+                                Ultimate Aim
                             </h4>
-                            <p class="text-xl italic text-light-text detail-content">
-                                My aim is to fully equip students with the necessary building blocks to connect themselves to the music inside sound — through whichever instrument of their choosing. And as this natural relationship is empowered through the tuning of the body to music, we explore more complex and intricate aspects of music as they become necessary.
+                            <ul class="space-y-4 text-2xl italic text-light-text list-disc list-inside px-6">
+                                <p>To nurture the inner instrument.</p>
+                                <p>To hold sacred the physical and emotional intelligence that gives rise to music.</p>
+                                <p>To make creation an act of will.</p>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+
+                <!-- MEETING POINT BETWEEN PSYCHOLOGY and the PHYSICS OF SOUND -->
+                <section id="physics-friction" class="space-y-16 py-16 border-t-2 border-primary-accent/50 mt-16">
+                    <h2 class="text-center tracking-wider text-primary-accent">
+                        <span class="text-xl font-normal block mb-1">A MEETING POINT BETWEEN</span>
+                        <span class="text-4xl font-bold uppercase block text-gold-accent">PSYCHOLOGY AND THE PHYSICS OF SOUND</span>
+                    </h2>
+                    <div class="grid md:grid-cols-2 gap-12">
+                        
+                        <div id="physics-box" class="space-y-6 text-xl leading-relaxed text-light-text p-8 border border-divider bg-dark-card/50">
+                            <h3 class="text-3xl font-bold text-gold-accent mb-4 uppercase tracking-wider border-b border-divider pb-2">Physics of Sound</h3>
+                            <p>
+                                The harmonic overtone series is the foundational meeting point between psychology and physics. Musical notes are tuned to the natural resonance frequency responses apparent all around in nature.
+                            </p>
+                            <p>
+                                Every sound echoes to musical principles that connect to various human emotions. 
+                            </p>
+                            <p class="italic text-primary-accent mt-4 font-light text-lg">
+                                The instrument is one piece of the puzzle… The way it’s played, the emotional state of the player, the room it resonates in, and how the musician is listening all create an intricate relationship that gives rise to the creative principle. 
+                            </p>
+                            <p class="mt-6">
+                                *If you wish to hear more about the physics of sound in your session, let me know. This won’t be a course on the math, but an overview of the fundamental principles.*
+                            </p>
+                        </div>
+                        
+                        <div id="friction-box" class="space-y-6 text-xl leading-relaxed text-light-text p-8 border border-divider bg-dark-card/50">
+                            <h3 class="text-3xl font-bold text-gold-accent mb-4 uppercase tracking-wider border-b border-divider pb-2">Friction</h3>
+                            <p>
+                                Every artist must become well-versed in the art of FRICTION.
+                            </p>
+                            <p>
+                                No authentic and self-expressive work of art was written without some sort of friction building the gravity for it.
+                            </p>
+                            <p>
+                                With Inner Music, we build sufficient understanding of how to direct the frustration of learning and creating toward the goal of <strong class="text-primary-accent">self-expression and artistry</strong>.
+                            </p>
+                            <p class="mt-6">
+                                This approach transforms resistance into a creative force, teaching you to use challenge as the source code for genuine, compelling art.
                             </p>
                         </div>
                     </div>
 
-                    <div id="practice-details" class="space-y-10">
-                        <h3 class="text-2xl uppercase tracking-widest text-primary-accent mb-8 border-b border-divider pb-3">
-                            Practice
-                        </h3>
-                        <ul class="space-y-5 text-xl text-light-text">
-                            <li class="pb-3 border-b border-divider">
-                                <strong class="text-primary-accent">Listening</strong> — Developing sensitivity to tone, space, rhythm, and silence.
-                            </li>
-                            <li class="pb-3 border-b border-divider">
-                                <strong class="text-primary-accent">Resonance</strong> — Feeling vibration in the body and learning to respond through movement.
-                            </li>
-                            <li class="pb-3 border-b border-divider">
-                                <strong class="text-primary-accent">Expression</strong> — Exploring how awareness becomes sound through your chosen instrument.
-                            </li>
-                            <li class="pb-3">
-                                <strong class="text-primary-accent">Reflection</strong> — Refining your aesthetic judgment by noticing what feels aligned, what feels false, what asks to return.
-                            </li>
-                        </ul>
-
-                        <h4 class="text-2xl uppercase tracking-wider text-primary-accent pt-8 border-t border-divider mb-4 font-bold">
-                            What To Expect
-                        </h4>
-                        <ul class="space-y-3 text-xl text-light-text pl-5 list-disc list-outside">
-                            <li>Growth of ear and musical perception.</li>
-                            <li>Cultivation of taste and creative instinct.</li>
-                            <li>Theoretical understanding as it becomes relevant.</li>
-                            <li>A steady link between creativity and effort.</li>
-                        </ul>
+                    <div class="text-center">
+                        <button onclick="navigateTo('contact-page')" class="inline-block px-16 py-6 text-2xl font-bold uppercase rounded-none tracking-wider transition-all duration-300 
+                                                    bg-light-text text-dark-bg border-2 border-light-text 
+                                                    hover:bg-dark-bg hover:text-light-text hover:border-primary-accent
+                                                    focus:outline-none focus:ring-4 focus:ring-primary-accent/50">
+                            Book a Consultation
+                        </button>
                     </div>
                 </section>
-
-                <section id="physics-friction" class="space-y-16 py-16 border-t-2 border-primary-accent/50 mt-16">
-                <h2 class="text-4xl font-bold text-primary-accent uppercase tracking-wider text-center">
-                    MEETING POINT BETWEEN PSYCHOLOGY and the PHYSICS OF SOUND
-                </h2>
-                <div class="grid md:grid-cols-2 gap-12">
-                    
-                    <div id="physics-box" class="space-y-6 text-xl leading-relaxed text-light-text p-8 border border-divider bg-dark-card/50">
-                        <h3 class="text-3xl font-bold text-gold-accent mb-4 uppercase tracking-wider border-b border-divider pb-2">Physics of Sound</h3>
-                        <p>
-                            The harmonic overtone series is the foundational meeting point between psychology and physics. Musical notes are tuned to the natural resonance frequency responses apparent all around in nature.
-                        </p>
-                        <p>
-                            Every sound echoes to musical principles that connect to various human emotions. 
-                        </p>
-                        <p class="italic text-primary-accent mt-4 font-light text-lg">
-                            The instrument is one piece of the puzzle… The way it’s played, the emotional state of the player, the room it resonates in, and how the musician is listening all create an intricate relationship that gives rise to the creative principle. 
-                        </p>
-                        <p class="mt-6">
-                            *If you wish to hear more about the physics of sound in your session, let me know. This won’t be a course on the math, but an overview of the fundamental principles.*
-                        </p>
-                    </div>
-                    
-                    <div id="friction-box" class="space-y-6 text-xl leading-relaxed text-light-text p-8 border border-divider bg-dark-card/50">
-                        <h3 class="text-3xl font-bold text-gold-accent mb-4 uppercase tracking-wider border-b border-divider pb-2">Friction</h3>
-                        <p>
-                            Every artist must become well-versed in the art of FRICTION.
-                        </p>
-                        <p>
-                            No authentic and self-expressive work of art was written without some sort of friction building the gravity for it.
-                        </p>
-                        <p>
-                            With Inner Music, we build sufficient understanding of how to direct the frustration of learning and creating toward the goal of <strong class="text-primary-accent">self-expression and artistry</strong>.
-                        </p>
-                        <p class="mt-6">
-                            This approach transforms resistance into a creative force, teaching you to use challenge as the source code for genuine, compelling art.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="text-center">
-                    <button onclick="navigateTo('contact-page')" class="inline-block px-16 py-6 text-2xl font-bold uppercase rounded-none tracking-wider transition-all duration-300 
-                                            bg-light-text text-dark-bg border-2 border-light-text 
-                                            hover:bg-dark-bg hover:text-light-text hover:border-primary-accent
-                                            focus:outline-none focus:ring-4 focus:ring-primary-accent/50">
-                        Book a Consultation
-                    </button>
-                </div>
-            </section>
             </div>
 
             <div id="contact-page" class="space-y-12 hidden max-w-4xl mx-auto">
@@ -494,7 +408,7 @@
                 
                 <div id="act-1-detail" class="bg-dark-card p-8 md:p-12 border border-primary-accent space-y-8 hidden">
                     <h2 class="text-5xl font-extrabold text-gold-accent tracking-tighter mb-4">ACT I</h2>
-                    <h3 class="text-4xl font-bold uppercase tracking-wider text-light-text border-b border-divider pb-4">ACTIVE LISTENING</h3>
+                    <h3 class="text-4x1 font-bold uppercase tracking-wider text-light-text border-b border-divider pb-4">ACTIVE LISTENING</h3>
                     <div class="text-2xl text-light-text detail-content space-y-6">
                         <p class="text-3xl font-semibold text-primary-accent pt-4">The first step is Active Listening.</p>
                         <p>
@@ -551,5 +465,7 @@
         </footer>
     </div>
     
-    </body>
+    <script src="script.js" defer></script> 
+
+</body>
 </html>

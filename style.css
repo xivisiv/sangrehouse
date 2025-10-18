@@ -1,42 +1,63 @@
-/* Custom CSS */
-body {
-    /* Apply EB Garamond globally */
-    font-family: 'EB Garamond', serif;
-    line-height: 1.8; /* Increased line height for better readability */
-}
-/* Style for form inputs */
-input[type="text"], input[type="email"], input[type="date"], input[type="tel"], textarea, select {
-    background-color: #380000;
-    border: 1px solid #800000;
-    color: #F0F0F0;
-    padding: 1rem;
-    border-radius: 0;
-    transition: border-color 0.3s;
-}
-input[type="text"]:focus, input[type="email"]:focus, input[type="date"]:focus, input[type="tel"]:focus, textarea:focus, select:focus {
-    border-color: #C0C0C0;
-    outline: none;
-}
 
-/* Custom scrollbar for a sharp look */
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-thumb { background-color: #F0F0F0; border-radius: 0; }
-::-webkit-scrollbar-track { background-color: #5C0000; }
+        body {
+            /* Apply EB Garamond globally */
+            font-family: 'EB Garamond', serif;
+            line-height: 1.8; /* Increased line height for better readability */
+        }
+        /* Style for form inputs */
+        input[type="text"], input[type="email"], input[type="date"], input[type="tel"], textarea, select {
+            background-color: #380000;
+            border: 1px solid #800000;
+            color: #F0F0F0;
+            padding: 1rem;
+            border-radius: 0;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus, input[type="email"]:focus, input[type="date"]:focus, input[type="tel"]:focus, textarea:focus, select:focus {
+            border-color: #C0C0C0;
+            outline: none;
+        }
 
-/* Custom style to replicate the bracket/square marker without list-disc */
-.li-marker::before {
-    /* The color is derived from the primary-accent Tailwind color, but since this is pure CSS 
-       and Tailwind variables are only available when using build tools, we will use a fixed color.
-       Using var(--tw-colors-primary-accent) is the correct approach here for the inline context.
-    */
-    content: '■ ';
-    color: var(--tw-colors-primary-accent);
-    font-weight: bold;
-    margin-right: 0.5rem; /* Space out the marker */
-}
 
-/* Ensure the detailed content scrolls well on smaller screens */
-.detail-content {
-    line-height: 1.75;
-    text-align: justify;
-}
+        blockquote {
+        font-family: 'EB Garamond', serif;
+        position: relative;
+        }
+
+        blockquote span {
+        display: block;
+        font-size: 1.2rem;
+        opacity: 0.8;
+        margin-top: 0.5rem;
+        }
+
+        h2.text-4xl, h3.text-4xl {
+        letter-spacing: 0.03em;
+        }
+
+        #physics-friction h2 {
+        font-size: 1.8rem; /* smaller, subtle passing title */
+        text-transform: uppercase;
+        font-weight: 600;
+        opacity: 0.8;
+        letter-spacing: 0.15em;
+        }
+
+        /* Custom scrollbar for a sharp look */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-thumb { background-color: #F0F0F0; border-radius: 0; }
+        ::-webkit-scrollbar-track { background-color: #5C0000; }
+        
+        /* Custom style to replicate the bracket/square marker without list-disc */
+        .li-marker::before {
+            content: '■ ';
+            color: var(--tw-colors-primary-accent);
+            font-weight: bold;
+            margin-right: 0.5rem; /* Space out the marker */
+        }
+        
+        /* Ensure the detailed content scrolls well on smaller screens */
+        .detail-content {
+            line-height: 1.75;
+            text-align: justify;
+        }
