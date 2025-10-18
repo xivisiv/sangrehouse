@@ -290,9 +290,10 @@ html {
 }
 
 .instruments-note {
-    font-size: 1rem; /* base */
+    font-size: 1.3rem; /* base */
     font-style: italic;
     padding-top: 1rem;
+    margin-bottom: 5rem;
     text-align: center;
     color: var(--primary-accent);
 }
