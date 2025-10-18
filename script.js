@@ -2,14 +2,12 @@
 const homePage = document.getElementById('home-page');
 const contactPage = document.getElementById('contact-page');
 const actDetailsContainer = document.getElementById('act-details-container');
-const mainContentWrapper = document.getElementById('main-content-wrapper');
 
-// Detail page elements (can be null before DOMContentLoaded, but we check their existence)
+// Detail page elements
 const act1Detail = document.getElementById('act-1-detail');
 const act2Detail = document.getElementById('act-2-detail');
 const act3Detail = document.getElementById('act-3-detail');
-const mainNav = document.getElementById('main-nav');
-const pageTitle = document.querySelector('title'); // Use querySelector('title') for the page title tag
+const pageTitle = document.querySelector('title'); 
 
 // Form and Modal Elements (Initialized in DOMContentLoaded)
 let form;
@@ -24,100 +22,130 @@ const formspreeEndpoint = "https://formspree.io/f/xzzjogqq";
 
 
 // --- Utility: Show/Hide Modal ---
+
+/**
+ * Shows the custom modal.
+ * @param {string} title - The title for the modal.
+ * @param {string} message - The message content for the modal (can contain HTML).
+ * @param {boolean} isSuccess - Determines the title color (true = gold, false = accent).
+ * @param {Function} callback - Function to run after the modal is closed.
+ */
 const showModal = (title, message, isSuccess = false, callback = null) => {
     // Check if modal elements exist before trying to update them
-    if (!modal || !modalTitle || !modalMessage || !modalCloseButton) return;
+    if (!modal || !modalTitle || !modalMessage || !modalCloseButton) {
+        console.error("Modal elements not found.");
+        return;
+    }
     
     modalTitle.textContent = title;
     modalMessage.innerHTML = message;
     
-    modal.classList.remove('hidden');
-    modal.classList.add('flex');
-    
-    // Use tailwind classes for color management
-    modalTitle.classList.remove('text-primary-accent', 'text-gold-accent');
-    modalTitle.classList.add(isSuccess ? 'text-gold-accent' : 'text-primary-accent');
+    // Remove the custom hiding class
+    modal.classList.remove('modal-hidden');
+    // Ensure it displays as a flex container (as defined in style.css)
+    modal.style.display = 'flex'; 
     
     // Set up the close button action
     modalCloseButton.onclick = () => {
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
+        modal.classList.add('modal-hidden');
+        modal.style.display = 'none'; // Explicitly hide
         if (callback) {
             callback();
+        }
+    };
+
+    // Attach listener to overlay to close on outside click
+    modal.onclick = (e) => {
+        if (e.target === modal) {
+            modal.classList.add('modal-hidden');
+            modal.style.display = 'none';
         }
     };
 };
 
 
-// --- Navigation Active State Handler (Simple for two main links) ---
-const updateNavActiveState = (page) => {
-    // Note: The navigation buttons use onclick directly in the HTML and do not need
-    // to be dynamically rebuilt unless you want to add an 'active' style.
-    // Since the HTML already uses `onclick="navigateTo('page-id')"` this function 
-    // is simplified to manage a theoretical 'active' visual state on the buttons if needed.
-    // For now, we rely on the direct onclick in the HTML for navigation.
-    
-    // We can hide/show the Contact button logic here if needed, but the original HTML is static.
+// --- Utility: Page Hiding Logic ---
+
+/**
+ * Hides all main content containers.
+ */
+const hideAllPages = () => {
+    const allContainers = [
+        homePage, 
+        contactPage, 
+        actDetailsContainer, 
+        act1Detail, 
+        act2Detail, 
+        act3Detail
+    ].filter(Boolean);
+
+    allContainers.forEach(el => {
+        el.classList.add('page-hidden');
+        el.classList.remove('page-visible');
+    });
 };
 
 
-// --- Core Router Function (Exposed to the global scope via `window` or default definition) ---
+// --- Core Router Function (Exposed to the global scope) ---
+
+/**
+ * Navigates to a specified page/section ID, updating visibility and title.
+ * @param {string} page - The ID of the page/section to display (e.g., 'home-page', 'contact-page', 'act-1-detail').
+ */
 window.navigateTo = (page) => {
-    // 1. Hide all main containers
-    const pagesToHide = [homePage, contactPage, actDetailsContainer, act1Detail, act2Detail, act3Detail].filter(Boolean);
-    pagesToHide.forEach(el => el.classList.add('hidden'));
+    hideAllPages();
 
     let newTitle = "INNER MUSIC - Sangre House Consulting";
-    let targetPage = page;
-    
-    // If navigating via the header click, targetPage is 'home'
-    if (page === 'home') {
-        targetPage = 'home-page'; 
-    }
-    // If navigating from the nav bar 'Book Session'
-    if (page === 'contact-page') {
-        targetPage = 'contact-page';
-    }
+    let targetPage = page === 'home' ? 'home-page' : page; // Handle header click alias
 
-
-    // 2. Update Visibility based on new page
-    if (targetPage === 'home-page') {
-        homePage.classList.remove('hidden');
+    // Logic to show main pages
+    if (targetPage === 'home-page' && homePage) {
+        homePage.classList.remove('page-hidden');
+        homePage.classList.add('page-visible');
         newTitle = "INNER MUSIC - Method Overview";
-    } else if (targetPage === 'contact-page') {
-        contactPage.classList.remove('hidden');
-        newTitle = "INNER MUSIC - Booking Inquiry";
-    } else if (targetPage === 'act-1-detail' && actDetailsContainer && act1Detail) {
-        actDetailsContainer.classList.remove('hidden');
-        act1Detail.classList.remove('hidden');
-        newTitle = "INNER MUSIC - ACT I: ACTIVE LISTENING";
-    } else if (targetPage === 'act-2-detail' && actDetailsContainer && act2Detail) {
-        actDetailsContainer.classList.remove('hidden');
-        act2Detail.classList.remove('hidden');
-        newTitle = "INNER MUSIC - ACT II: INTERNAL INSTRUMENT";
-    } else if (targetPage === 'act-3-detail' && actDetailsContainer && act3Detail) {
-        actDetailsContainer.classList.remove('hidden');
-        act3Detail.classList.remove('hidden');
-        newTitle = "INNER MUSIC - ACT III: INTENTIONALITY";
-    } else {
-        // Fallback to home if page ID is unrecognized (e.g., from header click)
-        homePage.classList.remove('hidden');
-    }
 
+    } else if (targetPage === 'contact-page' && contactPage) {
+        contactPage.classList.remove('page-hidden');
+        contactPage.classList.add('page-visible');
+        newTitle = "INNER MUSIC - Booking Inquiry";
+
+    } else if (targetPage.includes('act-') && actDetailsContainer) {
+        // Logic for Act Detail pages
+        actDetailsContainer.classList.remove('page-hidden');
+        actDetailsContainer.classList.add('page-visible');
+        
+        let detailElement = null;
+        let detailName = "";
+
+        if (targetPage === 'act-1-detail' && act1Detail) {
+            detailElement = act1Detail;
+            detailName = "ACT I: ACTIVE LISTENING";
+        } else if (targetPage === 'act-2-detail' && act2Detail) {
+            detailElement = act2Detail;
+            detailName = "ACT II: INTERNAL INSTRUMENT";
+        } else if (targetPage === 'act-3-detail' && act3Detail) {
+            detailElement = act3Detail;
+            detailName = "ACT III: INTENTIONALITY";
+        }
+
+        if (detailElement) {
+            detailElement.classList.remove('page-hidden');
+            detailElement.classList.add('page-visible');
+            newTitle = `INNER MUSIC - ${detailName}`;
+        }
+    }
+    
     // 3. Update title and scroll
     if (pageTitle) {
         pageTitle.textContent = newTitle;
     }
     
-    if (mainContentWrapper) {
-        mainContentWrapper.scrollIntoView({ behavior: 'smooth' }); // Scroll to the content area
-    }
-    
-    updateNavActiveState(targetPage);
+    // Scroll to the top of the content area
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
 
-// --- Form Submission Handler (Simulated Formspree Integration) ---
+// --- Form Submission Handler (Formspree Integration) ---
 const handleFormSubmission = async (event) => {
     event.preventDefault();
 
@@ -129,31 +157,10 @@ const handleFormSubmission = async (event) => {
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
     
-    // Create the full message content for simulation/email body
-    let messageBody = `
-        <h4 style="color:#C0C0C0; font-weight:bold; font-size:1.5rem; border-bottom:1px solid #A00000; padding-bottom:5px;">Contact Details</h4>
-        <ul style="list-style:none; padding:0; margin-top:10px; font-size:1.1rem;">
-            <li><strong>Name:</strong> ${data['Full Name']}</li>
-            <li><strong>Email:</strong> ${data['Email']}</li>
-            <li><strong>Phone:</strong> ${data['Phone Number']}</li>
-            <li><strong>DOB:</strong> ${data['Date of Birth']}</li>
-            <li><strong>Address:</strong> ${data['Address']}</li>
-        </ul>
-        
-        <h4 style="color:#C0C0C0; font-weight:bold; font-size:1.5rem; border-bottom:1px solid #A00000; padding-top:20px; padding-bottom:5px;">Session & Goal Details</h4>
-        <ul style="list-style:none; padding:0; margin-top:10px; font-size:1.1rem;">
-            <li><strong>Type:</strong> ${data['Session Type']}</li>
-            <li><strong>Package:</strong> ${data['Package Type']}</li>
-            <li><strong>Instrument Focus:</strong> ${data['Instrument Focus']}</li>
-            <li><strong>Availability:</strong> ${data['Availability']}</li>
-        </ul>
-        <h4 style="color:#C0C0C0; font-weight:bold; font-size:1.5rem; border-bottom:1px solid #A00000; padding-top:20px; padding-bottom:5px;">Goal Description</h4>
-        <p style="white-space:pre-wrap; font-size:1.1rem; margin-top:10px;">${data['Note/Goal Description']}</p>
-    `;
-
+    // Log data for debugging/simulated email content construction
+    console.log("Attempting submission with data:", data);
 
     try {
-        // Formspree submission (Ensure this is set up correctly in a real environment)
         const response = await fetch(formspreeEndpoint, {
             method: 'POST',
             headers: {
@@ -162,9 +169,8 @@ const handleFormSubmission = async (event) => {
             },
             body: JSON.stringify({
                 _subject: `New Inner Music Inquiry from ${data['Full Name']}`,
-                _cc: data['Email'],
-                ...data,
-                'Inquiry Details': messageBody 
+                _replyto: data['Email'], // Use _replyto for easy email reply
+                ...data
             })
         });
 
@@ -174,9 +180,10 @@ const handleFormSubmission = async (event) => {
                 navigateTo('home-page'); // Navigate back to the main page
             });
         } else {
-            // Handle Formspree-specific error response
-            const errorText = await response.text();
-            showModal('SUBMISSION FAILED', `We could not process your inquiry. Server status: ${response.status}. Error details: ${errorText.substring(0, 100)}`, false);
+            // Handle Formspree error response (e.g., rate limiting, bad data)
+            const errorData = await response.json();
+            const errorMessage = errorData.error || `Server status: ${response.status}.`;
+            showModal('SUBMISSION FAILED', `We could not process your inquiry. Error: ${errorMessage}`, false);
         }
     } catch (error) {
         // Handle critical network error
@@ -191,7 +198,7 @@ const handleFormSubmission = async (event) => {
 
 // --- Initialization ---
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize elements used by the modal/form handler
+    // --- 1. Initialize Global/DOM Elements ---
     form = document.getElementById('contact-form');
     submitButton = document.getElementById('submit-button');
     modal = document.getElementById('custom-modal');
@@ -199,11 +206,13 @@ document.addEventListener('DOMContentLoaded', () => {
     modalMessage = document.getElementById('modal-message');
     modalCloseButton = document.getElementById('modal-close-button');
 
-    // Set up form listener (Formspree simulation)
+    // --- 2. Set up form listener ---
     if (form) {
         form.addEventListener('submit', handleFormSubmission);
     }
     
-    // Set initial page view to ensure 'home-page' is visible on load
-    navigateTo('home-page'); 
+    // --- 3. Set initial page view ---
+    // Check for a deep link (e.g., #contact-page) or default to 'home-page'
+    const initialPage = window.location.hash.substring(1) || 'home-page';
+    navigateTo(initialPage);
 });

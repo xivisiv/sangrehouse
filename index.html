@@ -34,37 +34,35 @@
         }
     </script>
 </head>
-<body class="bg-dark-bg text-light-text selection:bg-light-text selection:text-dark-bg transition-colors duration-300">
+<body class="main-body">
 
-    <div id="custom-modal" class="fixed inset-0 bg-dark-bg/80 hidden items-center justify-center z-50">
-        <div class="bg-dark-card border-4 border-primary-accent p-8 md:p-12 w-full max-w-lg space-y-6">
-            <h3 id="modal-title" class="text-4xl font-bold text-gold-accent uppercase tracking-wider"></h3>
-            <p id="modal-message" class="text-xl text-light-text"></p>
-            <button id="modal-close-button"
-                    class="block w-full px-6 py-3 text-2xl font-bold uppercase rounded-none tracking-wider transition-colors duration-200 
-                            bg-primary-accent text-dark-bg hover:bg-light-text">
+    <div id="custom-modal" class="modal-overlay modal-hidden">
+        <div class="modal-content">
+            <h3 id="modal-title" class="modal-title"></h3>
+            <p id="modal-message" class="modal-message"></p>
+            <button id="modal-close-button" class="modal-button">
                 Close
             </button>
         </div>
     </div>
 
-    <div class="max-w-6xl mx-auto px-8 lg:px-12 py-16">
+    <div class="page-wrapper">
 
-        <header class="flex justify-between items-start border-b border-divider pb-6 mb-16 content-block max-w-full">
-            <div class="space-y-1">
-                <h1 class="text-5xl sm:text-6xl font-bold tracking-tight text-light-text leading-none cursor-pointer" onclick="navigateTo('home')">
+        <header class="main-header">
+            <div class="brand-group">
+                <h1 class="brand-title" onclick="navigateTo('home')">
                     INNER MUSIC
                 </h1>
-                <p class="text-xl font-light text-primary-accent uppercase tracking-widest">
+                <p class="brand-subtitle">
                     Sangre House Consulting
                 </p>
             </div>
 
-            <nav id="main-nav" class="text-right text-lg tracking-wider text-muted-text uppercase space-y-2 pt-1">
-                <button class="block hover:text-light-text transition-colors duration-200" onclick="navigateTo('home-page')">
+            <nav id="main-nav" class="main-nav">
+                <button class="nav-link" onclick="navigateTo('home-page')">
                     Method
                 </button>
-                <button class="block hover:text-light-text transition-colors duration-200" onclick="navigateTo('contact-page')">
+                <button class="nav-link" onclick="navigateTo('contact-page')">
                     Book Session
                 </button>
             </nav>
@@ -72,103 +70,121 @@
         
         <div id="main-content-wrapper">
             
-            <div id="home-page" class="space-y-24">
-
-
-                <!-- THE METHOD TO MADNESS SECTION -->
-            <section id="method">
+            <div id="home-page" class="page-section-group">
                 
-                <p class="text-4xl italic text-light-text border-l-4 border-primary-accent pl-6 py-2 leading-tight mb-10">
-                    “And those who were seen dancing were thought to be insane by those who could not hear the music.” — Nietzsche
-                </p>
+                <section id="method" class="section-method">
+                    
+                    <p class="method-quote">
+                        “And those who were seen dancing were thought to be insane by those who could not hear the music.” — Nietzsche
+                    </p>
 
-                <div class="bg-dark-card p-8 md:p-12 border border-primary-accent">
-                    
-                    <h2 class="text-2xl uppercase tracking-widest text-primary-accent mb-6 font-bold">
-                        THE METHOD TO MADNESS
-                    </h2>
-                    
-                    <div class="mt-10 space-y-8 text-xl text-light-text">
-                        <p>
-                            The earliest musicians built relationships with natural sounds in the environment. Whether hitting an object by accident and hearing its resonance echo, the rhythmic beating of walking, or the sound of firewood igniting. This set the foundation for the method to madness that is music.
-                        </p>
+                    <div class="method-box">
+                        
+                        <h2 class="method-title-inside">
+                            THE METHOD TO MADNESS
+                        </h2>
+                        
+                        <div class="method-prose-group">
+                            <p>
+                                The earliest musicians built relationships with natural sounds in the environment. Whether hitting an object by accident and hearing its resonance echo, the rhythmic beating of walking, or the sound of firewood igniting. This set the foundation for the method to madness that is music.
+                            </p>
+                        </div>
                     </div>
-                </div>
-            </section>
+                </section>
                 
-                <!-- THE THREE ACTS OF INNER MUSIC SECTION -->
-                <section id="acts-method" class="border-y border-divider py-12">
-                    <h3 class="text-3xl font-bold text-primary-accent uppercase tracking-wider text-center mb-12">
+                <section id="acts-method" class="section-acts-method">
+                    <h3 class="acts-title">
                         The Three Acts of Inner Music
                     </h3>
-                    <div class="grid md:grid-cols-3 gap-10 text-center text-xl">
+                    <div class="acts-grid">
                         
-                        <div id="act-1" class="space-y-4 p-6 border border-divider hover:border-primary-accent transition duration-300 cursor-pointer" onclick="navigateTo('act-1-detail')">
-                            <p class="text-5xl font-extrabold text-gold-accent tracking-tighter">I</p>
-                            <p class="text-2xl font-bold uppercase tracking-wider text-light-text">ACT I: ACTIVE LISTENING</p>
-                            <p class="text-muted-text">
+                        <div id="act-1" class="act-card" onclick="navigateTo('act-1-detail')">
+                            <p class="act-number">I</p>
+                            <p class="act-name">ACT I: ACTIVE LISTENING</p>
+                            <p class="act-description">
                                 This develops an awareness of the relationship between mind and environment. (Click for in-depth view)
                             </p>
                         </div>
 
-                        <div id="act-2" class="space-y-4 p-6 border border-divider hover:border-primary-accent transition duration-300 cursor-pointer" onclick="navigateTo('act-2-detail')">
-                            <p class="text-5xl font-extrabold text-gold-accent tracking-tighter">II</p>
-                            <p class="text-2xl font-bold uppercase tracking-wider text-light-text">ACT II: INTERNAL INSTRUMENT</p>
-                            <p class="text-muted-text">
+                        <div id="act-2" class="act-card" onclick="navigateTo('act-2-detail')">
+                            <p class="act-number">II</p>
+                            <p class="act-name">ACT II: INTERNAL INSTRUMENT</p>
+                            <p class="act-description">
                                 A learned listener of sound, by sheer act of listening, internally resonates to the atmosphere of sound like an instrument. (Click for in-depth view)
                             </p>
                         </div>
 
-                        <div id="act-3" class="space-y-4 p-6 border border-divider hover:border-primary-accent transition duration-300 cursor-pointer" onclick="navigateTo('act-3-detail')">
-                            <p class="text-5xl font-extrabold text-gold-accent tracking-tighter">III</p>
-                            <p class="text-2xl font-bold uppercase tracking-wider text-light-text">ACT III: INTENTIONALITY</p>
-                            <p class="text-muted-text">
+                        <div id="act-3" class="act-card" onclick="navigateTo('act-3-detail')">
+                            <p class="act-number">III</p>
+                            <p class="act-name">ACT III: INTENTIONALITY</p>
+                            <p class="act-description">
                                 The combination of Active Listening and body responsiveness through the Inner Instrument creates the ability to respond to sound with intentionality. (Click for in-depth view)
                             </p>
                         </div>
 
                     </div>
                 </section>
-                
-                <!-- AIM SECTION -->
-                <section class="space-y-16 pt-16">
 
-                    <div id="aim-centered-top" class="text-center mx-auto max-w-4xl">
-                        <h3 class="text-4xl uppercase tracking-widest text-primary-accent mb-6 border-b border-divider pb-3 font-bold">
+                <section id="instruments-taught" class="section-instruments">
+                    <h2 class="instruments-title">
+                        Instruments We Explore
+                    </h2>
+                    <div class="instruments-group">
+                        <ul class="instruments-grid">
+                            <li class="instrument-card">
+                                Guitar <span class="instrument-detail"></span>
+                            </li>
+                            <li class="instrument-card">
+                                Bass Guitar
+                            </li>
+                            <li class="instrument-card">
+                                Keys
+                            </li>
+                        </ul>
+                        <p class="instruments-note">
+                            Percussion, vocals, and other instruments can be incorporated as the lesson plan progresses. These will be accessories to the overall musical development of the client.
+                        </p>
+                    </div>
+                </section>
+
+                <section class="section-aims-practice">
+
+                    <div id="aim-centered-top" class="aim-section-top">
+                        <h3 class="aim-title-main">
                             AIM
                         </h3>
-                        <p class="text-2xl italic text-light-text detail-content p-8 border-2 border-primary-accent bg-dark-card/75 shadow-lg">
+                        <p class="aim-prose">
                             My aim is to fully equip students with the necessary building blocks to connect themselves to the music inside sound — through whichever instrument of their choosing. And as this natural relationship is empowered through the tuning of the body to music, we explore more complex and intricate aspects of music as they become necessary.
                         </p>
                     </div>
 
-                    <div class="grid md:grid-cols-2 gap-20">
+                    <div class="practice-expect-grid">
                         
-                        <div id="practice" class="space-y-6">
-                            <h3 class="text-3xl uppercase tracking-widest text-primary-accent mb-4 border-b border-divider pb-3 font-bold">
+                        <div id="practice" class="vertical-spacing">
+                            <h3 class="practice-title">
                                 PRACTICE
                             </h3>
-                            <ul class="space-y-5 text-xl text-light-text">
-                                <li class="pb-3 border-b border-divider">
-                                    <strong class="text-primary-accent">Listening</strong> — developing sensitivity to tone, space, rhythm, and silence.
+                            <ul class="practice-list">
+                                <li class="practice-item">
+                                    <strong class="practice-item-strong">Listening</strong> — developing sensitivity to tone, space, rhythm, and silence.
                                 </li>
-                                <li class="pb-3 border-b border-divider">
-                                    <strong class="text-primary-accent">Resonance</strong> — feeling vibration in the body and learning to respond through movement.
+                                <li class="practice-item">
+                                    <strong class="practice-item-strong">Resonance</strong> — feeling vibration in the body and learning to respond through movement.
                                 </li>
-                                <li class="pb-3 border-b border-divider">
-                                    <strong class="text-primary-accent">Expression</strong> — exploring how awareness becomes sound through your chosen instrument.
+                                <li class="practice-item">
+                                    <strong class="practice-item-strong">Expression</strong> — exploring how awareness becomes sound through your chosen instrument.
                                 </li>
-                                <li class="pb-3">
-                                    <strong class="text-primary-accent">Reflection</strong> — refining your aesthetic judgment by noticing what feels aligned, what feels false, what asks to return.
+                                <li class="practice-item">
+                                    <strong class="practice-item-strong">Reflection</strong> — refining your aesthetic judgment by noticing what feels aligned, what feels false, what asks to return.
                                 </li>
                             </ul>
                         </div>
 
-                        <div id="what-to-expect" class="space-y-10">
-                            <h3 class="text-3xl uppercase tracking-widest text-primary-accent mb-8 border-b border-divider pb-3 font-bold">
+                        <div id="what-to-expect" class="vertical-spacing">
+                            <h3 class="expect-title">
                                 WHAT TO EXPECT
                             </h3>
-                            <ul class="space-y-5 text-xl text-light-text pl-5 list-disc list-outside">
+                            <ul class="expect-list">
                                 <li>Developed ear and capacity for active listening.</li>
                                 <li>Expanded aesthetic palette and knowledge of the choices you can make.</li>
                                 <li>Knowledge of music theory (as needed—assessed based on student’s needs).</li>
@@ -179,156 +195,148 @@
                         </div>
                     </div>
                     
-                    <div id="ultimate-aim-centered" class="md:col-span-2 text-center pt-16">
-                        <div class="mx-auto max-w-2xl p-10 border-4 border-primary-accent bg-dark-card/75 shadow-lg">
-                            <h4 class="text-3xl uppercase tracking-widest text-gold-accent mb-6 font-bold">
-                                Ultimate Aim
+                    <div id="ultimate-aim-centered" class="ultimate-aim-group">
+                        <div class="ultimate-aim-box">
+                            <h4 class="ultimate-aim-title">
+                                IV. Ultimate Aim
                             </h4>
-                            <ul class="space-y-4 text-2xl italic text-light-text list-disc list-inside px-6">
-                                <p>To nurture the inner instrument.</p>
-                                <p>To hold sacred the physical and emotional intelligence that gives rise to music.</p>
-                                <p>To make creation an act of will.</p>
+                            <ul class="ultimate-aim-list">
+                                <li>To nurture the inner instrument.</li>
+                                <li>To hold sacred the physical and emotional intelligence that gives rise to music.</li>
+                                <li>To make creation an act of will.</li>
                             </ul>
                         </div>
                     </div>
                 </section>
 
-
-                <!-- MEETING POINT BETWEEN PSYCHOLOGY and the PHYSICS OF SOUND -->
-                <section id="physics-friction" class="space-y-16 py-16 border-t-2 border-primary-accent/50 mt-16">
-                    <h2 class="text-center tracking-wider text-primary-accent">
-                        <span class="text-xl font-normal block mb-1">A MEETING POINT BETWEEN</span>
-                        <span class="text-4xl font-bold uppercase block text-gold-accent">PSYCHOLOGY AND THE PHYSICS OF SOUND</span>
+                <section id="physics-friction" class="section-physics-friction">
+                    <h2 class="physics-main-title">
+                        <span class="physics-subtitle">A MEETING POINT BETWEEN</span>
+                        <span class="physics-title-main">PSYCHOLOGY AND THE PHYSICS OF SOUND</span>
                     </h2>
-                    <div class="grid md:grid-cols-2 gap-12">
+                    <div class="physics-friction-grid">
                         
-                        <div id="physics-box" class="space-y-6 text-xl leading-relaxed text-light-text p-8 border border-divider bg-dark-card/50">
-                            <h3 class="text-3xl font-bold text-gold-accent mb-4 uppercase tracking-wider border-b border-divider pb-2">Physics of Sound</h3>
-                            <p>
-                                The harmonic overtone series is the foundational meeting point between psychology and physics. Musical notes are tuned to the natural resonance frequency responses apparent all around in nature.
-                            </p>
-                            <p>
-                                Every sound echoes to musical principles that connect to various human emotions. 
-                            </p>
-                            <p class="italic text-primary-accent mt-4 font-light text-lg">
-                                The instrument is one piece of the puzzle… The way it’s played, the emotional state of the player, the room it resonates in, and how the musician is listening all create an intricate relationship that gives rise to the creative principle. 
-                            </p>
-                            <p class="mt-6">
-                                *If you wish to hear more about the physics of sound in your session, let me know. This won’t be a course on the math, but an overview of the fundamental principles.*
-                            </p>
+                        <div id="physics-box" class="physics-card">
+                            <h3 class="physics-card-title">Physics of Sound</h3>
+                            <div class="physics-card-content">
+                                <p>
+                                    The <strong class="text-primary-accent">harmonic overtone series</strong> is the foundational meeting point between psychology and physics. Musical notes are tuned to the natural resonance frequency responses apparent all around in nature.
+                                </p>
+                                <p>
+                                    Every sound echoes to musical principles that connect to various human emotions. 
+                                </p>
+                                <p class="physics-card-quote">
+                                    The instrument is one piece of the puzzle… The way it’s played, the emotional state of the player, the room it resonates in, and how the musician is listening all create an intricate relationship that gives rise to the creative principle. 
+                                </p>
+                                <p class="physics-card-note">
+                                    *If you wish to hear more about the physics of sound in your session, let me know. This won’t be a course on the math, but an overview of the fundamental principles.*
+                                </p>
+                            </div>
                         </div>
                         
-                        <div id="friction-box" class="space-y-6 text-xl leading-relaxed text-light-text p-8 border border-divider bg-dark-card/50">
-                            <h3 class="text-3xl font-bold text-gold-accent mb-4 uppercase tracking-wider border-b border-divider pb-2">Friction</h3>
-                            <p>
-                                Every artist must become well-versed in the art of FRICTION.
-                            </p>
-                            <p>
-                                No authentic and self-expressive work of art was written without some sort of friction building the gravity for it.
-                            </p>
-                            <p>
-                                With Inner Music, we build sufficient understanding of how to direct the frustration of learning and creating toward the goal of <strong class="text-primary-accent">self-expression and artistry</strong>.
-                            </p>
-                            <p class="mt-6">
-                                This approach transforms resistance into a creative force, teaching you to use challenge as the source code for genuine, compelling art.
-                            </p>
+                        <div id="friction-box" class="friction-card">
+                            <h3 class="friction-card-title">Friction</h3>
+                            <div class="friction-card-content">
+                                <p>
+                                    Every artist must become well-versed in the art of <strong class="text-primary-accent">FRICTION</strong>.
+                                </p>
+                                <p>
+                                    No authentic and self-expressive work of art was written without some sort of <strong class="text-primary-accent">friction</strong> building the gravity for it.
+                                </p>
+                                <p>
+                                    With Inner Music, we build sufficient understanding of how to direct the <strong class="text-primary-accent">frustration of learning and creating</strong> toward the goal of <strong class="text-primary-accent">self-expression and artistry</strong>.
+                                </p>
+                                <p class="friction-card-note">
+                                    This approach transforms resistance into a creative force, teaching you to use challenge as the source code for genuine, compelling art.
+                                </p>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="text-center">
-                        <button onclick="navigateTo('contact-page')" class="inline-block px-16 py-6 text-2xl font-bold uppercase rounded-none tracking-wider transition-all duration-300 
-                                                    bg-light-text text-dark-bg border-2 border-light-text 
-                                                    hover:bg-dark-bg hover:text-light-text hover:border-primary-accent
-                                                    focus:outline-none focus:ring-4 focus:ring-primary-accent/50">
+                    <div class="section-call-to-action">
+                        <button onclick="navigateTo('contact-page')" class="cta-button">
                             Book a Consultation
                         </button>
                     </div>
                 </section>
             </div>
 
-            <div id="contact-page" class="space-y-12 hidden max-w-4xl mx-auto">
-                <button onclick="navigateTo('home')" class="text-xl font-bold text-primary-accent hover:text-light-text transition duration-200 flex items-center mb-12">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 mr-3">
+            <div id="contact-page" class="contact-page-container page-hidden">
+                <button onclick="navigateTo('home')" class="contact-back-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="contact-back-icon">
                         <path d="M19 12H5"></path>
                         <path d="M12 19l-7-7 7-7"></path>
                     </svg>
                     BACK TO HOME PAGE
                 </button>
-                <div id="contact-form-container" class="content-block bg-dark-card p-8 md:p-12 border border-primary-accent mx-auto">
-                    <h2 class="text-4xl font-bold text-primary-accent uppercase tracking-wider mb-8 text-center">
+                <div id="contact-form-container" class="contact-form-wrapper">
+                    <h2 class="contact-form-title">
                         SEND YOUR INQUIRY
                     </h2>
                     
-                    <form id="contact-form" class="space-y-10"> 
+                    <form id="contact-form" class="contact-form-group"> 
                         
-                        <fieldset class="space-y-6 border-b border-divider pb-8">
-                            <legend class="text-3xl font-bold mb-6 text-gold-accent">1. Your Contact Details</legend>
+                        <fieldset class="form-fieldset">
+                            <legend class="form-legend">1. Your Contact Details</legend>
                             
-                            <label for="full_name" class="block text-2xl text-light-text">Full Name *</label>
-                            <input type="text" id="full_name" name="Full Name" required 
-                                class="w-full text-xl p-3 bg-dark-bg text-light-text border border-primary-accent rounded-none focus:ring-2 focus:ring-light-text focus:border-light-text outline-none">
+                            <label for="full_name" class="form-label">Full Name *</label>
+                            <input type="text" id="full_name" name="Full Name" required class="form-input">
 
-                            <label for="email" class="block text-2xl pt-2 text-light-text">Email *</label>
-                            <input type="email" id="email" name="Email" required 
-                                class="w-full text-xl p-3 bg-dark-bg text-light-text border border-primary-accent rounded-none focus:ring-2 focus:ring-light-text focus:border-light-text outline-none">
+                            <label for="email" class="form-label">Email *</label>
+                            <input type="email" id="email" name="Email" required class="form-input">
 
-                            <div class="grid md:grid-cols-2 gap-6">
+                            <div class="form-grid-two">
                                 <div>
-                                    <label for="phone" class="block text-2xl pt-2 text-light-text">Phone Number *</label>
-                                    <input type="tel" id="phone" name="Phone Number" required placeholder="Required for contact" 
-                                        class="w-full text-xl p-3 bg-dark-bg text-light-text border border-primary-accent rounded-none focus:ring-2 focus:ring-light-text focus:border-light-text outline-none">
+                                    <label for="phone" class="form-label">Phone Number *</label>
+                                    <input type="tel" id="phone" name="Phone Number" required placeholder="Required for contact" class="form-input">
                                 </div>
                                 <div>
-                                    <label for="dob" class="block text-2xl pt-2 text-light-text">Date of Birth *</label>
-                                    <input type="date" id="dob" name="Date of Birth" required 
-                                        class="w-full text-xl p-3 bg-dark-bg text-light-text border border-primary-accent rounded-none focus:ring-2 focus:ring-light-text focus:border-light-text outline-none">
+                                    <label for="dob" class="form-label">Date of Birth *</label>
+                                    <input type="date" id="dob" name="Date of Birth" required class="form-input">
                                 </div>
                             </div>
 
-                            <label for="address" class="block text-2xl pt-2 text-light-text">Address *</label>
-                            <input type="text" id="address" name="Address" required placeholder="Street Address, City, State/Province, Zip/Postal Code" 
-                                class="w-full text-xl p-3 bg-dark-bg text-light-text border border-primary-accent rounded-none focus:ring-2 focus:ring-light-text focus:border-light-text outline-none">
+                            <label for="address" class="form-label">Address *</label>
+                            <input type="text" id="address" name="Address" required placeholder="Street Address, City, State/Province, Zip/Postal Code" class="form-input">
                         </fieldset>
 
-                        <fieldset class="space-y-8 border-b border-divider pb-8">
-                            <legend class="text-3xl font-bold mb-6 text-gold-accent">2. Session Preference & Goals</legend>
+                        <fieldset class="form-fieldset">
+                            <legend class="form-legend">2. Session Preference & Goals</legend>
                             
-                            <div id="price-chart" class="bg-dark-bg p-6 border border-primary-accent">
-                                <h4 class="text-2xl font-bold text-gold-accent mb-4 uppercase tracking-wider">Pricing (Per 1-Hour Session)</h4>
-                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-xl">
+                            <div id="price-chart" class="price-chart-box">
+                                <h4 class="price-chart-title">Pricing (Per 1-Hour Session)</h4>
+                                <div class="price-chart-grid">
                                     <div>
-                                        <p class="font-bold text-primary-accent border-b border-divider pb-2 mb-2">In Person (Los Angeles)</p>
-                                        <ul class="space-y-2">
-                                            <li>Single Session: <strong class="text-light-text">$185</strong></li>
-                                            <li>4-Session Package: <strong class="text-light-text">$700</strong> ($175 ea)</li>
-                                            <li>8-Session Package: <strong class="text-light-text">$1320</strong> ($165 ea)</li>
+                                        <p class="price-type-header">In Person (Los Angeles)</p>
+                                        <ul class="price-list">
+                                            <li>Single Session: <strong class="price-value">$185</strong></li>
+                                            <li>4-Session Package: <strong class="price-value">$700</strong> ($175 ea)</li>
+                                            <li>8-Session Package: <strong class="price-value">$1320</strong> ($165 ea)</li>
                                         </ul>
                                     </div>
                                     <div>
-                                        <p class="font-bold text-primary-accent border-b border-divider pb-2 mb-2">Over Video Call (Zoom)</p>
-                                        <ul class="space-y-2">
-                                            <li>Single Session: <strong class="text-light-text">$155</strong></li>
-                                            <li>4-Session Package: <strong class="text-light-text">$580</strong> ($145 ea)</li>
-                                            <li>8-Session Package: <strong class="text-light-text">$1030</strong> ($135 ea)</li>
+                                        <p class="price-type-header">Over Video Call (Zoom)</p>
+                                        <ul class="price-list">
+                                            <li>Single Session: <strong class="price-value">$155</strong></li>
+                                            <li>4-Session Package: <strong class="price-value">$580</strong> ($145 ea)</li>
+                                            <li>8-Session Package: <strong class="price-value">$1030</strong> ($135 ea)</li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="grid md:grid-cols-2 gap-6">
+                            <div class="form-grid-two">
                                 <div>
-                                    <label for="session_type" class="block text-2xl pt-4 text-light-text">Session Type *</label>
-                                    <select id="session_type" name="Session Type" required 
-                                        class="w-full text-xl p-3 bg-dark-bg text-light-text border border-primary-accent rounded-none focus:ring-2 focus:ring-light-text focus:border-light-text outline-none">
+                                    <label for="session_type" class="form-label-top-padding">Session Type *</label>
+                                    <select id="session_type" name="Session Type" required class="form-select">
                                         <option value="">-- Select session type --</option>
                                         <option value="In Person">In Person</option>
                                         <option value="Over Video Call">Over Video Call</option>
                                     </select>
                                 </div>
                                 <div>
-                                    <label for="package_type" class="block text-2xl pt-4 text-light-text">Interested Package Type *</label>
-                                    <select id="package_type" name="Package Type" required 
-                                        class="w-full text-xl p-3 bg-dark-bg text-light-text border border-primary-accent rounded-none focus:ring-2 focus:ring-light-text focus:border-light-text outline-none">
+                                    <label for="package_type" class="form-label-top-padding">Interested Package Type *</label>
+                                    <select id="package_type" name="Package Type" required class="form-select">
                                         <option value="">-- Select an option --</option>
                                         <option value="Initial Session">Initial Session (Single)</option>
                                         <option value="4-Session Package">4-Session Package</option>
@@ -338,24 +346,21 @@
                             </div>
 
 
-                            <label for="instrument" class="block text-2xl pt-4 text-light-text">Instrument Focus *</label>
-                            <input type="text" id="instrument" name="Instrument Focus" required placeholder="e.g., Guitar, Voice, Production..." 
-                                class="w-full text-xl p-3 bg-dark-bg text-light-text border border-primary-accent rounded-none focus:ring-2 focus:ring-light-text focus:border-light-text outline-none">
+                            <label for="instrument" class="form-label-top-padding">Instrument Focus *</label>
+                            <input type="text" id="instrument" name="Instrument Focus" required placeholder="e.g., Guitar, Voice, Production..." class="form-input">
                             
-                            <label for="availability" class="block text-2xl pt-4 text-light-text">Your General Availability *</label>
-                            <textarea id="availability" name="Availability" rows="3" placeholder="Please list your general availability (e.g., 'Tuesdays and Thursdays after 6pm EST', or 'Any time Saturday') so we can suggest an initial time." required 
-                                class="w-full text-xl p-3 bg-dark-bg text-light-text border border-primary-accent rounded-none focus:ring-2 focus:ring-light-text focus:border-light-text outline-none"></textarea>
+                            <label for="availability" class="form-label-top-padding">Your General Availability *</label>
+                            <textarea id="availability" name="Availability" rows="3" placeholder="Please list your general availability (e.g., 'Tuesdays and Thursdays after 6pm EST', or 'Any time Saturday') so we can suggest an initial time." required class="form-textarea"></textarea>
                             
-                            <label for="note" class="block text-2xl pt-4 border-t border-divider text-light-text">Note / Session Goal Description *</label>
-                            <textarea id="note" name="Note/Goal Description" rows="4" placeholder="Describe the 'friction' or musical problem you are currently facing and any specific questions you have." required 
-                                class="w-full text-xl p-3 bg-dark-bg text-light-text border border-primary-accent rounded-none focus:ring-2 focus:ring-light-text focus:border-light-text outline-none"></textarea>
+                            <label for="note" class="form-label-top-padding form-label-border-top">Note / Session Goal Description *</label>
+                            <textarea id="note" name="Note/Goal Description" rows="4" placeholder="Describe the 'friction' or musical problem you are currently facing and any specific questions you have." required class="form-textarea"></textarea>
                         </fieldset>
 
-                        <fieldset class="space-y-6">
-                            <legend class="text-3xl font-bold mb-6 text-gold-accent">3. Preparation & Confirmation</legend>
+                        <fieldset class="form-fieldset-no-border">
+                            <legend class="form-legend">3. Preparation & Confirmation</legend>
                             
-                            <div class="pt-4 pb-4 border-y border-divider">
-                                <p class="text-lg italic text-muted-text">
+                            <div class="form-policy-note">
+                                <p>
                                     Each session is one hour.<br>
                                     Packages are paid upfront and must be used within 8–10 weeks (4-pack) or 16–20 weeks (8-pack).<br>
                                     Reschedules allowed with 24-hour notice.<br>
@@ -363,36 +368,33 @@
                                 </p>
                             </div>
 
-                            <div class="pt-2 text-xl space-y-4">
-                                <p class="text-2xl text-primary-accent font-bold">Preparation Checklist *:</p>
+                            <div class="form-checklist-group">
+                                <p class="form-checklist-title">Preparation Checklist *:</p>
                                 
-                                <label class="flex items-start space-x-3 cursor-pointer">
-                                    <input type="checkbox" name="Prep_Tech_Ready" required class="mt-2 h-5 w-5 accent-primary-accent bg-dark-bg border border-primary-accent">
+                                <label class="form-checkbox-label">
+                                    <input type="checkbox" name="Prep_Tech_Ready" required class="form-checkbox">
                                     <span>If requesting a Zoom session, I confirm I have a working microphone and video setup.</span>
                                 </label>
                                 
-                                <label class="flex items-start space-x-3 cursor-pointer">
-                                    <input type="checkbox" name="Prep_Instrument_Tuned" required class="mt-2 h-5 w-5 accent-primary-accent bg-dark-bg border border-primary-accent">
+                                <label class="form-checkbox-label">
+                                    <input type="checkbox" name="Prep_Instrument_Tuned" required class="form-checkbox">
                                     <span>My instrument (if applicable) will be tuned and ready for the scheduled session.</span>
                                 </label>
                                 
-                                <label class="flex items-start space-x-3 cursor-pointer">
-                                    <input type="checkbox" name="Prep_Quiet_Space" required class="mt-2 h-5 w-5 accent-primary-accent bg-dark-bg border border-primary-accent">
+                                <label class="form-checkbox-label">
+                                    <input type="checkbox" name="Prep_Quiet_Space" required class="form-checkbox">
                                     <span>I plan to be in a quiet, focused space free from distractions during the session.</span>
                                 </label>
                                 
-                                <label class="flex items-start space-x-3 cursor-pointer">
-                                    <input type="checkbox" name="Prep_Reviewed_Policies" required class="mt-2 h-5 w-5 accent-primary-accent bg-dark-bg border border-primary-accent">
+                                <label class="form-checkbox-label">
+                                    <input type="checkbox" name="Prep_Reviewed_Policies" required class="form-checkbox">
                                     <span>I understand this is an inquiry, and the final time and payment will be arranged via email.</span>
                                 </label>
                             </div>
                         </fieldset>
 
-                        <div class="pt-8 text-center">
-                            <button type="submit" id="submit-button" class="w-full md:w-auto inline-block px-16 py-6 text-2xl font-bold uppercase rounded-none tracking-wider transition-all duration-300 
-                                            bg-light-text text-dark-bg border-2 border-light-text 
-                                            hover:bg-dark-bg hover:text-light-text hover:border-primary-accent
-                                            focus:outline-none focus:ring-4 focus:ring-primary-accent/50">
+                        <div class="form-submit-center">
+                            <button type="submit" id="submit-button" class="cta-button-large">
                                 Send Inquiry
                             </button>
                         </div>
@@ -400,20 +402,20 @@
                 </div>
             </div>
             
-            <div id="act-details-container" class="space-y-16 hidden max-w-4xl mx-auto">
-                <button onclick="navigateTo('home-page')" class="text-xl font-bold text-primary-accent hover:text-light-text transition duration-200 flex items-center mb-12">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6 mr-3">
+            <div id="act-details-container" class="act-details-group page-hidden">
+                <button onclick="navigateTo('home-page')" class="contact-back-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="contact-back-icon">
                         <path d="M19 12H5"></path>
                         <path d="M12 19l-7-7 7-7"></path>
                     </svg>
                     BACK TO METHOD OVERVIEW
                 </button>
                 
-                <div id="act-1-detail" class="bg-dark-card p-8 md:p-12 border border-primary-accent space-y-8 hidden">
-                    <h2 class="text-5xl font-extrabold text-gold-accent tracking-tighter mb-4">ACT I</h2>
-                    <h3 class="text-4x1 font-bold uppercase tracking-wider text-light-text border-b border-divider pb-4">ACTIVE LISTENING</h3>
-                    <div class="text-2xl text-light-text detail-content space-y-6">
-                        <p class="text-3xl font-semibold text-primary-accent pt-4">The first step is Active Listening.</p>
+                <div id="act-1-detail" class="act-detail-box page-hidden">
+                    <h2 class="act-detail-number">ACT I</h2>
+                    <h3 class="act-detail-title">ACTIVE LISTENING</h3>
+                    <div class="act-detail-content">
+                        <p class="act-detail-intro">The first step is Active Listening.</p>
                         <p>
                             This develops an awareness of the relationship between mind and environment.
                         </p>
@@ -423,10 +425,10 @@
                     </div>
                 </div>
 
-                <div id="act-2-detail" class="bg-dark-card p-8 md:p-12 border border-primary-accent space-y-8 hidden">
-                    <h2 class="text-5xl font-extrabold text-gold-accent tracking-tighter mb-4">ACT II</h2>
-                    <h3 class="text-4xl font-bold uppercase tracking-wider text-light-text border-b border-divider pb-4">INTERNAL INSTRUMENT</h3>
-                    <div class="text-2xl text-light-text detail-content space-y-6">
+                <div id="act-2-detail" class="act-detail-box page-hidden">
+                    <h2 class="act-detail-number">ACT II</h2>
+                    <h3 class="act-detail-title">INTERNAL INSTRUMENT</h3>
+                    <div class="act-detail-content">
                         <p>
                             The continuance of this cycle builds the internal “instrument” which hears and processes this relationship as music. This inner instrument is the creative principle which is inherent to all of the arts, specifically music. 
                         </p>
@@ -439,10 +441,10 @@
                     </div>
                 </div>
 
-                <div id="act-3-detail" class="bg-dark-card p-8 md:p-12 border border-primary-accent space-y-8 hidden">
-                    <h2 class="text-5xl font-extrabold text-gold-accent tracking-tighter mb-4">ACT III</h2>
-                    <h3 class="text-4xl font-bold uppercase tracking-wider text-light-text border-b border-divider pb-4">INTENTIONALITY</h3>
-                    <div class="text-2xl text-light-text detail-content space-y-6">
+                <div id="act-3-detail" class="act-detail-box page-hidden">
+                    <h2 class="act-detail-number">ACT III</h2>
+                    <h3 class="act-detail-title">INTENTIONALITY</h3>
+                    <div class="act-detail-content">
                         <p>
                             The combination of Active Listening and body responsiveness through the Inner Instrument creates the ability to respond to sound with intentionality. With this ability to be intentional, we can begin to explore aesthetic choices or more complex music theoretical constructs which fine tune and expand the relationships we can have with sound to build the direct and authentic experience we are called upon.
                         </p>
@@ -457,11 +459,11 @@
             </div>
 
         </div>
-        <footer class="bg-dark-card py-10 mt-24">
-            <div class="max-w-6xl mx-auto px-12 text-center text-xl tracking-wider text-muted-text">
+        <footer class="main-footer">
+            <div class="footer-text">
                 Aeon Lajmiri
             </div>
-            <div class="max-w-6xl mx-auto px-12 text-center text-xl tracking-wider text-muted-text">
+            <div class="footer-text-copyright">
                 &copy; 2025 Sangre House Consulting. All Rights Reserved.
             </div>
 
