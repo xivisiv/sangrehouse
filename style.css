@@ -290,7 +290,7 @@ html {
 }
 
 .instruments-note {
-    font-size: 1.3rem; /* base */
+    font-size: 1.rem; /* base */
     font-style: italic;
     padding-top: 1rem;
     margin-bottom: 5rem;
@@ -879,7 +879,7 @@ html {
 }
 
 .act-detail-title {
-    font-size: 2.25rem; /* 4xl */
+    font-size: 1.5rem; /* 4xl */
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
